@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="PlanarCityLoc combines silhouette-based coarse initialization with explicit 3D–2D plane correspondences for aerial localization in textureless LoD city models.">
+  <title>PlanarCityLoc · Aerial Localization with 3D Planes</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=red-plane-2">
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="research.css?v=camera-ready-1">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="teaser.css">
+  <link rel="stylesheet" href="identity.css?v=hero-logo-4">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="PlanarCityLoc home">
+      <span>PlanarCityLoc</span>
+    </a>
+    <nav id="section-nav" aria-label="Primary navigation">
+      <a href="#teaser">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#qualitative">Qualitative</a>
+      <a href="#results">Quantitative</a>
+      <a href="#citation">Citation</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode" hidden>
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.5A8.7 8.7 0 0 1 8.5 3.7a8.7 8.7 0 1 0 11.8 11.8Z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-backdrop" aria-hidden="true"><div class="hero-query"></div><canvas id="hero-geometry"></canvas></div>
+      <div class="hero-copy section-shell reveal visible">
+        <div class="eyebrow">WACV 2027</div>
+        <h1><span class="title-lockup"><span class="animated-mark hero-mark" aria-hidden="true"></span><span class="paper-name">PlanarCityLoc</span></span><span class="paper-subtitle">Breaking Silhouette Ambiguity in LoD Aerial Localization via 3D Planes</span></h1>
+        <ul class="authors" aria-label="Authors">
+          <li><a href="https://ussaema.github.io">Oussema Dhaouadi</a><sup title="TUM.ai; Technical University of Munich; University of Cambridge; ETH Zürich; Munich Center for Machine Learning">1,2,4,5,6</sup></li>
+          <li><a href="https://www.linkedin.com/in/shaojiehuchen/">Shao Jie Hu Chen</a><sup title="TUM.ai; Technical University of Munich">1,2</sup></li>
+          <li><a href="https://www.linkedin.com/in/jakob-gollreiter-939615194/">Jakob Gollreiter</a><sup title="TUM.ai; Technical University of Munich">1,2</sup></li>
+          <li><a href="https://www.linkedin.com/in/samir-jusufi/">Samir Jusufi</a><sup title="TUM.ai; Ludwig-Maximilians-Universität München">1,3</sup></li>
+          <li><a href="https://www.linkedin.com/in/nikolas-rieger/">Nikolas Rieger</a><sup title="TUM.ai; Technical University of Munich">1,2</sup></li>
+          <li><a href="https://www.linkedin.com/in/caroline-wendlandt/">Caroline Wendlandt</a><sup title="TUM.ai; Technical University of Munich">1,2</sup></li>
+          <li><a href="https://www.linkedin.com/in/christian-wender/">Christian Wender</a><sup title="TUM.ai; BMW Group">1,7</sup></li>
+          <li><a href="https://www.linkedin.com/in/jingfeng-mao-125928260/">Jingfeng Mao</a><sup title="Technical University of Munich; University of Cambridge">2,4</sup></li>
+          <li><a href="https://www.linkedin.com/in/guangming-wang/">Guangming Wang</a><sup title="University of Cambridge">4</sup></li>
+          <li><a href="https://zuriabauer.com/">Zuria Bauer</a><sup title="ETH Zürich">5</sup></li>
+          <li><a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup title="ETH Zürich; Microsoft">5,8</sup></li>
+          <li><a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup title="Technical University of Munich; Munich Center for Machine Learning">2,6</sup></li>
+          <li><a href="https://olafwysocki.github.io/">Olaf Wysocki</a><sup title="University of Cambridge">4</sup></li>
+        </ul>
+        <ul class="institutions" aria-label="Author affiliations">
+          <li><a href="https://www.tum-ai.com/" title="TUM.ai" aria-label="1. TUM.ai"><sup aria-hidden="true">1</sup><span class="institution-logo institution-tumai"><img class="institution-light" src="assets/institutions/tum-ai-color.svg" alt="" width="37" height="30" decoding="async"><img class="institution-dark" src="assets/institutions/tum-ai-color-dark.svg" alt="" width="37" height="30" decoding="async"><span>TUM.ai</span></span></a></li>
+          <li><a href="https://www.tum.de/en/" title="Technical University of Munich" aria-label="2. Technical University of Munich"><sup aria-hidden="true">2</sup><img class="institution-tum" src="assets/institutions/tum-blue.svg" alt="Technical University of Munich" width="55" height="29" decoding="async"></a></li>
+          <li><a href="https://www.lmu.de/en/" title="Ludwig-Maximilians-Universität München" aria-label="3. Ludwig-Maximilians-Universität München"><sup aria-hidden="true">3</sup><img class="institution-lmu" src="assets/institutions/lmu.svg" alt="Ludwig-Maximilians-Universität München" width="81" height="38" decoding="async"></a></li>
+          <li><a href="https://www.cam.ac.uk/" title="University of Cambridge" aria-label="4. University of Cambridge"><sup aria-hidden="true">4</sup><span class="institution-logo institution-cambridge"><img class="institution-light" src="assets/institutions/cambridge.svg" alt="University of Cambridge" width="128" height="27" decoding="async"><img class="institution-dark" src="assets/institutions/cambridge-dark.png" alt="University of Cambridge" width="128" height="27" decoding="async"></span></a></li>
+          <li><a href="https://ethz.ch/" title="ETH Zürich" aria-label="5. ETH Zürich"><sup aria-hidden="true">5</sup><img class="institution-mono institution-eth" src="assets/institutions/eth-zurich.svg" alt="ETH Zürich" width="112" height="19" decoding="async"></a></li>
+          <li><a href="https://mcml.ai/" title="Munich Center for Machine Learning" aria-label="6. Munich Center for Machine Learning"><sup aria-hidden="true">6</sup><img class="institution-mono institution-mcml" src="assets/institutions/mcml.png" alt="Munich Center for Machine Learning" width="99" height="15" decoding="async"></a></li>
+          <li><a href="https://www.bmwgroup.com/en.html" title="BMW Group" aria-label="7. BMW Group"><sup aria-hidden="true">7</sup><img class="institution-mono institution-bmw" src="assets/institutions/bmw-group.svg" alt="BMW Group" width="68" height="36" decoding="async"></a></li>
+          <li><a href="https://www.microsoft.com/en-us/research/lab/spatial-ai-zurich/" title="Microsoft" aria-label="8. Microsoft"><sup aria-hidden="true">8</sup><span class="institution-logo institution-microsoft"><img class="institution-light" src="assets/institutions/microsoft.png" alt="Microsoft" width="102" height="22" decoding="async"><img class="institution-dark" src="assets/institutions/microsoft-dark.png" alt="Microsoft" width="102" height="22" decoding="async"></span></a></li>
+        </ul>
+        <p class="lede">We combine silhouette-based coarse initialization with explicit 3D–2D plane correspondences to refine camera pose in lightweight, textureless LoD city models.</p>
+        <div class="actions">
+          <span class="button muted" aria-disabled="true">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg>Paper (coming soon)
+          </span>
+          <a class="button primary" href="https://github.com/tum-vision/PlanarCityLoc" target="_blank" rel="noopener">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.02 1.53 1.02.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.96c.85 0 1.7.11 2.5.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.41.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.33 4.68-4.56 4.93.36.31.68.92.68 1.85v2.61c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>Code
+          </a>
+          <a class="button ghost" href="assets/PlanarCityLoc-WACV2027-poster.pdf" target="_blank" rel="noopener" type="application/pdf">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Poster
+          </a>
+          <a class="button ghost" href="https://youtu.be/oDJtUY4ZRsE" target="_blank" rel="noopener">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 8 6 4-6 4Z"/></svg>Video
+          </a>
+          <a class="button ghost" href="https://github.com/tum-vision/PlanarCityLoc/blob/main/data/README.md" target="_blank" rel="noopener">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg>Datasets
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="teaser" class="teaser section-shell" aria-labelledby="teaser-title">
+      <figure class="teaser-figure" data-stage="0" data-playing="false">
+        <div class="teaser-topline">
+          <div><h2 id="teaser-title">3D planar grounding</h2><p>Rotate the city model, select a plane, and move the camera.</p></div>
+          <div class="teaser-playback"><button id="teaser-replay" type="button" aria-label="Replay teaser animation">Replay</button><button id="teaser-play" type="button" aria-label="Play teaser animation"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="teaser-pause-symbol" d="M7 4v12M13 4v12"/><path class="teaser-play-symbol" d="m6 3 10 7-10 7Z"/></svg><span>Play</span></button></div>
+        </div>
+        <div class="teaser-steps" role="group" aria-label="Teaser animation stages">
+          <button type="button" data-teaser-step="0" aria-pressed="true">1. Silhouettes</button>
+          <button type="button" data-teaser-step="1" aria-pressed="false">2. Plane matches</button>
+          <button type="button" data-teaser-step="2" aria-pressed="false">3. Pose refinement</button>
+        </div>
+        <div id="teaser-viewports" class="teaser-viewports">
+          <div class="teaser-viewport">
+            <div class="viewport-heading"><h3>3D city model</h3><span>Drag to rotate · select a surface</span></div>
+            <canvas id="teaser-city" tabindex="0" role="img" aria-label="Interactive LoD3 city model. Drag to orbit or use arrow keys. Press Enter to select the next plane; plus and minus zoom." aria-describedby="teaser-status"></canvas>
+            <div class="teaser-plane-controls"><button id="teaser-roof" type="button">Select roof</button><button id="teaser-facade" type="button">Select façade</button><button id="teaser-reset" type="button">Reset view</button></div>
+          </div>
+          <div class="teaser-viewport">
+            <div class="viewport-heading"><h3>Camera projection</h3><span>Same selected plane, projected into the image</span></div>
+            <canvas id="teaser-projection" tabindex="0" role="img" aria-label="LoD polygons projected into the calibrated aerial query. Click a polygon or use the roof and facade selection buttons." aria-describedby="teaser-status"></canvas>
+            <div class="projection-key"><span>Solid: current pose</span><span>Dashed: reference pose</span></div>
+          </div>
+          <svg id="teaser-link-overlay" aria-hidden="true"><path/><circle r="4"/></svg>
+        </div>
+        <p id="teaser-status" class="teaser-status" role="status">Loading the LoD model…</p>
+        <div class="teaser-bottom">
+          <div class="teaser-explainer">
+            <p id="teaser-explanation">Similar 2D silhouettes can occur at different camera poses. Move the camera to inspect the ambiguity.</p>
+            <div class="pose-control"><label for="teaser-offset">Camera offset <output id="teaser-offset-value">+8.0 m</output></label><input id="teaser-offset" type="range" min="-12" max="12" step="0.1" value="8" aria-describedby="teaser-pose-note"><div class="pose-scale"><span>−12 m</span><span>Reference pose</span><span>+12 m</span></div></div>
+            <p id="teaser-pose-note">The slider translates the camera along its horizontal axis. It does not rotate the model.</p>
+          </div>
+          <div class="teaser-landscape">
+            <h3>Conceptual score landscape</h3>
+            <div class="teaser-legend"><span class="legend-v2">LoD-Loc v2</span><span class="legend-v3">LoD-Loc v3</span><span class="legend-ours">Ours</span></div>
+            <svg id="teaser-chart" viewBox="0 0 480 352" role="img" aria-label="Conceptual score curves: silhouette ambiguity and zero-gradient regions, followed by geometry-aware scoring and plane refinement">
+              <defs><clipPath id="teaser-chart-clip"><rect x="52" y="28" width="404" height="256"/></clipPath></defs>
+              <g class="teaser-chart-grid"><path d="M52 79.2H456M52 130.4H456M52 181.6H456M52 232.8H456M52 284H456M153 28V284M254 28V284M355 28V284"/></g>
+              <path class="teaser-chart-axis" d="M52 28V284H456"/>
+              <g class="teaser-chart-ticks"><text x="42" y="289">0</text><text x="42" y="238">.2</text><text x="42" y="187">.4</text><text x="42" y="135">.6</text><text x="42" y="84">.8</text><text x="52" y="308">−40</text><text x="153" y="308">−20</text><text x="254" y="308">0</text><text x="355" y="308">20</text><text x="456" y="308">40</text></g>
+              <text class="teaser-axis-label" x="254" y="339" text-anchor="middle">Pose error (m / °)</text>
+              <text class="teaser-axis-label" x="16" y="152" text-anchor="middle" transform="rotate(-90 16 152)">Score</text>
+              <g clip-path="url(#teaser-chart-clip)"><g id="teaser-curves"></g></g>
+              <g id="teaser-ambiguity" class="teaser-chart-annotation"><path d="M177 67 225 101"/><text x="74" y="57">Ambiguous overlap</text></g>
+              <g id="teaser-plateau" class="teaser-chart-annotation"><path d="M356 202 342 269"/><text x="305" y="193">Zero gradient</text></g>
+              <line id="teaser-refinement" class="teaser-refinement" x1="245" y1="60" x2="254" y2="106"/>
+              <circle id="teaser-pose" class="teaser-pose" cx="245" cy="60" r="6"/>
+              <path id="teaser-target" class="teaser-target" d="m254 99 2.2 5.1 5.6.5-4.3 3.6 1.3 5.4-4.8-2.9-4.8 2.9 1.3-5.4-4.3-3.6 5.6-.5Z"/>
+            </svg>
+
+          </div>
+        </div>
+        <figcaption>Interactive illustration: select a 3D plane to see its image projection, then vary the camera pose. Camera motion and score curves are illustrative. <a href="assets/live-city/provenance.json">Model data</a> · <a href="https://github.com/tum-vision/PlanarCityLoc/blob/main/DATA_PROVENANCE.md">Data sources and terms</a>.</figcaption>
+      </figure>
+      <noscript><p>Enable JavaScript to rotate the model and explore camera alignment.</p></noscript>
+    </section>
+
+    <section id="method" class="method section-shell">
+      <div class="section-heading split-heading">
+        <div><span>01 / Method</span><h2>The PlanarCityLoc pipeline</h2></div>
+        <p>Follow the query and the city model through geometry extraction, coarse initialization, and iterative 3D planar grounding.</p>
+      </div>
+      <div class="pipeline-explorer" id="pipeline-explorer" data-playing="false">
+        <div class="pipeline-toolbar">
+          <div><strong>Pipeline overview</strong><span id="pipeline-position">a / e</span></div>
+          <div class="pipeline-controls">
+            <button id="pipeline-focus" type="button" aria-pressed="false">Focus stage</button>
+            <button id="pipeline-play" type="button" aria-label="Play pipeline animation"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="play-symbol" d="m9 5 11 7-11 7Z"/><path class="pause-symbol" d="M8 5v14M16 5v14"/></svg><span>Play</span></button>
+            <button id="pipeline-replay" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg>Replay</button>
+          </div>
+        </div>
+        <div class="pipeline-stage-buttons" role="group" aria-label="Pipeline stages">
+          <button type="button" data-pipeline-step="0" aria-pressed="true"><span>a</span>Geometry &amp; semantics</button>
+          <button type="button" data-pipeline-step="1" aria-pressed="false"><span>b</span>Plane extraction</button>
+          <button type="button" data-pipeline-step="2" aria-pressed="false"><span>c</span>Coarse initialization</button>
+          <button type="button" data-pipeline-step="3" aria-pressed="false"><span>d</span>Iterative PnP</button>
+          <button type="button" data-pipeline-step="4" aria-pressed="false"><span>e</span>Pose selection</button>
+        </div>
+        <div id="pipeline-canvas" class="pipeline-canvas" aria-label="Interactive PlanarCityLoc pipeline"></div>
+        <noscript><p>Enable JavaScript to explore the pipeline: geometry and semantics, plane extraction, coarse initialization, iterative PnP, and pose selection.</p></noscript>
+        <div class="pipeline-scrubber"><label for="pipeline-time">Animation</label><input id="pipeline-time" type="range" min="0" max="24999" step="1" value="0" aria-label="Pipeline animation progress"><output id="pipeline-time-label">0:00 / 0:25</output></div>
+        <div class="pipeline-explanation">
+          <div><span id="pipeline-detail-tag">(a) Query geometry</span><h3 id="pipeline-detail-title">Geometry and semantics extraction</h3><p id="pipeline-detail-text">The camera-ready configuration uses MoGe-2 ViT-S for depth and normals; SAM 3 supplies a building mask. Sobel filtering of the normals provides structural edges.</p></div>
+          <dl><div><dt>Input</dt><dd id="pipeline-input">RGB query image Iq</dd></div><div><dt>Output</dt><dd id="pipeline-output">Depth Dq, normals Nq, mask Mq, edges Eq</dd></div></dl>
+        </div>
+        <p class="pipeline-note">Animated algorithm overview. Query geometry stays fixed while plane correspondences refine the camera pose.</p>
+      </div>
+    </section>
+
+    <section id="qualitative" class="qualitative-viewer section-shell" aria-labelledby="qualitative-title">
+        <div class="qualitative-heading">
+          <div><div class="section-heading"><span>02 / Qualitative evaluation</span><h2 id="qualitative-title">Visual comparisons</h2></div><p>Compare 10 selected examples across two datasets. The gallery shows cases where PlanarCityLoc has lower translation and rotation errors than the methods available for that example; these per-image examples are not aggregate results.</p></div>
+        </div>
+        <div class="dataset-tabs" role="group" aria-label="Qualitative dataset">
+          <button type="button" data-gallery-dataset="all" aria-pressed="true">All datasets</button>
+          <button type="button" data-gallery-dataset="uav" aria-pressed="false">UAVD4L-LoDv2</button>
+          <button type="button" data-gallery-dataset="swiss" aria-pressed="false">Swiss-EPFL-v2</button>
+        </div>
+        <div id="comparison-grid" class="comparison-grid"></div>
+        <template id="comparison-card-template"><article class="comparison-card">
+          <div class="comparison-card-heading"><div><span data-field="dataset"></span><h3 data-field="split"></h3></div><span data-field="lod"></span></div>
+          <div class="sample-browser"><div class="sample-navigation"><button data-action="previous" type="button" aria-label="Previous example">Previous</button><output data-field="count" aria-live="polite"></output><button data-action="next" type="button" aria-label="Next example">Next</button></div><div data-field="samples" class="sample-tabs" role="group" aria-label="Choose an example"></div></div>
+          <div class="comparison-controls">
+            <label class="field">Left method<select data-field="left"></select></label>
+            <button class="comparison-swap" data-action="swap" type="button" aria-label="Swap left and right methods" title="Swap methods">⇄</button>
+            <label class="field">Right method<select data-field="right"></select></label>
+          </div>
+          <div class="comparison-stage">
+            <div data-field="images" class="comparison-images">
+              <img data-field="right-image" alt="Right method alignment" width="960" height="720">
+              <img data-field="left-image" class="comparison-left-image" alt="Left method alignment" width="960" height="720">
+              <div class="comparison-divider" aria-hidden="true"><span>↔</span></div>
+              <span class="comparison-image-label comparison-left-label" data-field="left-label"></span>
+              <span class="comparison-image-label comparison-right-label" data-field="right-label"></span>
+              <input data-field="slider" type="range" min="0" max="100" value="50" step="1" aria-label="Image comparison divider" aria-describedby="comparison-help" aria-valuetext="50% left method, 50% right method">
+            </div>
+          </div>
+          <div class="comparison-errors" aria-live="polite"><div data-field="left-error"></div><div data-field="right-error"></div></div>
+          <p data-field="meta" class="comparison-frame"></p>
+          <p data-field="status" class="comparison-status" role="status"></p>
+        </article></template>
+        <p id="comparison-help" class="comparison-note">Same query and image coordinates on both sides. Red lines are LoD edges rendered at the selected pose. Use the arrow keys to move the divider; Home/End reveal one method completely.</p>
+        <p class="comparison-note">Errors: translation (m) / rotation (°). Examples compare LoD-Loc v2 + SAM 3, the particle-filter stage, and PlanarCityLoc. Saved-run settings can differ from the aggregate benchmark. <a href="assets/comparisons/additional-provenance.json">Additional prediction details</a> · Swiss model: ©swisstopo.</p>
+      </section>
+
+    <section id="results" class="results section-shell">
+      <div class="section-heading"><span>03 / Quantitative evaluation</span><h2>Quantitative results</h2></div>
+      <div class="dataset-tabs" role="group" aria-label="Evaluation dataset">
+        <button type="button" data-dataset="uav" aria-pressed="true">UAVD4L-LoDv2</button>
+        <button type="button" data-dataset="swiss" aria-pressed="false">Swiss-EPFL-v2</button>
+      </div>
+      <div class="table-toolbar">
+        <label class="field" for="results-split">Evaluation split<select id="results-split"><option value="0">in-Traj</option><option value="1">out-of-Traj</option></select></label>
+        <p class="table-hint">Click a heading: best first, reverse, then reset.</p>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Sortable benchmark results">
+        <table class="results-table">
+          <caption id="results-caption">UAVD4L-LoDv2 · in-Traj · LoD3</caption>
+          <thead><tr>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="method">Method <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="model">Vision model <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="setup">Setup <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="0">2 m–2° ↑ <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="1">3 m–3° ↑ <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="2">5 m–5° ↑ <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="3">T.e. (m) ↓ <span aria-hidden="true">↕</span></button></th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort="4">R.e. (°) ↓ <span aria-hidden="true">↕</span></button></th>
+          </tr></thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+      <p class="visually-hidden" id="results-sort-status" role="status"></p>
+      <p class="table-note">Joint-threshold recall (%) and median translation/rotation errors. Best and second-best distinct values are bold and underlined within each setup group, including ties. † Adapted re-runs with different map and evaluation assumptions. * Uses the non-public InsLoD-Loc training set.</p>
+      <noscript><p>Enable JavaScript to switch datasets, sort the table, and compare predictions.</p></noscript>
+
+
+    </section>
+
+    <section id="citation" class="citation section-shell reveal">
+      <div class="section-heading"><h2>Citation</h2></div>
+      <div class="code-card">
+        <button id="copy-bib" type="button">Copy BibTeX</button>
+        <pre><code id="bibtex">@inproceedings{dhaouadi2027planarcityloc,
+  title     = {{PlanarCityLoc}: Breaking Silhouette Ambiguity in {LoD} Aerial Localization via 3{D} Planes},
+  author    = {Dhaouadi, Oussema and Hu Chen, Shao Jie and
+               Gollreiter, Jakob and Jusufi, Samir and Rieger, Nikolas and
+               Wendlandt, Caroline and Wender, Christian and Mao, Jingfeng and
+               Wang, Guangming and Bauer, Zuria and Pollefeys, Marc and
+               Cremers, Daniel and Wysocki, Olaf},
+  booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2027}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="teaser-data.js"></script>
+  <script src="teaser.js"></script>
+  <script src="pipeline-diagram.js?v=camera-ready-1"></script>
+  <script src="results-data.js?v=camera-ready-1"></script>
+  <script src="qualitative-samples.js?v=camera-ready-1"></script>
+  <script src="results-explorer.js?v=camera-ready-1"></script>
+  <script src="script.js"></script>
+  <script src="identity.js?v=logo-stacked-1"></script>
+</body>
+</html>

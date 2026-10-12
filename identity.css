@@ -1,0 +1,72 @@
+/* A quiet, layered identity built around aerial imagery and planar geometry. */
+:root { --glass: #ffffffad; --hero-red: #ffe2dc; --hero-amber: #f5ebdd; }
+[data-theme="dark"] { --glass: #15171bb8; --hero-red: #3c1c1b; --hero-amber: #302b23; }
+.site-header, [data-theme="dark"] .site-header { background: linear-gradient(110deg, #e6786814, transparent 50%, #cdb38d10), var(--glass); border-bottom-color: #a3948526; box-shadow: 0 1px 0 #ffffff26 inset, 0 6px 30px #3b211006; backdrop-filter: blur(26px) saturate(160%); -webkit-backdrop-filter: blur(26px) saturate(160%); }
+.site-header .theme-toggle { background: #aab7c110; }
+.site-header nav a { padding-block: 6px; }
+.hero { position: relative; isolation: isolate; overflow: hidden; margin-top: calc(20px - var(--header-offset, 84px)); padding: calc(var(--header-offset, 84px) + 14px) 0 58px; background: radial-gradient(ellipse at 1% 24%, var(--hero-red), transparent 58%), radial-gradient(ellipse at 98% 34%, var(--hero-amber), transparent 56%), var(--deep); }
+.hero::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(0deg, var(--deep), transparent 34%), radial-gradient(ellipse at 50% 43%, var(--deep) 8%, transparent 72%); pointer-events: none; }
+.hero-backdrop { position: absolute; z-index: -2; inset: 0; pointer-events: none; }
+.hero-query { position: absolute; left: -160px; top: 90px; width: min(780px, 65vw); height: 610px; background: url('assets/live-city/query.webp') center / cover; opacity: .2; transform: perspective(1000px) rotateY(17deg) rotateZ(-15deg); mask-image: radial-gradient(ellipse, #000 4%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse, #000 4%, transparent 70%); }
+#hero-geometry { position: absolute; right: -160px; top: 40px; width: min(900px, 70vw); height: 680px; opacity: .4; mask-image: radial-gradient(ellipse, #000 12%, transparent 72%); -webkit-mask-image: radial-gradient(ellipse, #000 12%, transparent 72%); }
+[data-theme="dark"] .hero-query { opacity: .14; }
+[data-theme="dark"] #hero-geometry { opacity: .3; }
+.hero h1 { margin: 8px auto 28px; max-width: 970px; }
+.title-lockup { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: clamp(2.4rem, 5vw, 4.1rem); letter-spacing: -.035em; }
+.paper-name { color: var(--accent); }
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .paper-name { background: linear-gradient(115deg, #c22925 5%, #a63c32 48%, #493d38 100%); background-clip: text; -webkit-background-clip: text; color: transparent; }
+  [data-theme="dark"] .paper-name { background-image: linear-gradient(115deg, #ffb0a3 5%, #ff665e 48%, #eec6b8 100%); }
+}
+.paper-subtitle { display: block; max-width: 860px; margin: 8px auto 0; font-size: clamp(1.5rem, 2.8vw, 2.2rem); line-height: 1.25; letter-spacing: -.03em; font-weight: 550; text-wrap: balance; }
+.animated-mark { --logo-plane: var(--accent); display: inline-block; width: 46px; height: 46px; flex: none; }
+.animated-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.animated-mark image { filter: grayscale(1); }
+.animated-mark .logo-ray { fill: none; stroke: var(--accent); stroke-width: 3; opacity: .58; }
+.animated-mark .logo-plane { fill: var(--logo-plane); fill-opacity: .5; stroke: var(--logo-plane); stroke-width: 3; }
+.animated-mark .logo-point { fill: var(--logo-plane); stroke: var(--panel); stroke-width: 2; }
+.logo-rotor-disc { fill: #888; opacity: .09; stroke: #888; stroke-width: 1; }
+.logo-rotor-hub { fill: #eee; stroke: #555; stroke-width: 1.5; }
+.hero-mark { width: 176px; height: 176px; }
+.authors { list-style: none; padding: 0; max-width: 980px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 23px; font-size: 1rem; line-height: 1.9; margin: 0 auto 24px; }
+.authors li { white-space: nowrap; }
+.authors sup { margin-left: .2em; color: var(--muted); font-size: .7em; line-height: 0; vertical-align: super; }
+.institutions { list-style: none; padding: 0; margin: 4px auto 32px; max-width: 680px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; gap: 14px 24px; }
+.institutions li { min-width: 0; }
+.institutions a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; border-radius: 4px; }
+.institutions a:hover { opacity: .75; }
+.institutions sup { align-self: flex-start; padding-top: 3px; color: var(--muted); font: 500 .75rem/1.5 system-ui, sans-serif; }
+.institutions img { height: auto; max-width: calc(100% - 18px); object-fit: contain; }
+.institution-logo { display: block; max-width: calc(100% - 18px); }
+.institution-logo img { max-width: 100%; }
+.institution-tumai { display: flex; align-items: center; gap: 6px; color: var(--ink); font: 650 16px/1.2 system-ui, sans-serif; white-space: nowrap; }
+.institution-tumai img { flex: none; }
+.institution-mono { filter: brightness(0) opacity(.82); }
+.institution-dark { display: none; }
+[data-theme="dark"] .institution-mono { filter: brightness(0) invert(1) opacity(.9); }
+[data-theme="dark"] .institution-light { display: none; }
+[data-theme="dark"] .institution-dark { display: block; }
+.authors a, [data-theme="dark"] .authors a { color: var(--ink); border: 0; text-decoration: none; }
+.authors a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+.lede { max-width: 740px; }
+.teaser { padding-top: 12px; }
+[hidden] { display: none !important; }
+@media (max-width: 700px) {
+  .hero { padding-bottom: 36px; }
+  .hero h1 { margin-bottom: 25px; }
+  .title-lockup { gap: 5px; font-size: 2.4rem; }
+  .hero-mark { width: 120px; height: 120px; }
+  .paper-subtitle { font-size: 1.6rem; margin-top: 12px; }
+  .authors { gap: 5px 18px; font-size: .9375rem; }
+  .institutions { max-width: 350px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+  .hero-query { width: 85vw; left: -180px; opacity: .17; }
+  #hero-geometry { width: 105vw; right: -200px; opacity: .3; }
+}
+@media (max-width: 380px) {
+  .title-lockup { font-size: 2rem; }
+  .hero-mark { width: 96px; height: 96px; }
+  .paper-subtitle { font-size: 1.4rem; }
+  .authors { font-size: .875rem; gap: 6px 15px; }
+}
+@media (prefers-reduced-transparency: reduce) { .site-header, [data-theme="dark"] .site-header { background: var(--deep); backdrop-filter: none; } }
+@media (forced-colors: active) { :root .paper-name { background: none; color: CanvasText; } }

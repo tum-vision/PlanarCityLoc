@@ -1,0 +1,34 @@
+{
+  "source": {
+    "source": "PlanarCityLoc full-split evaluation"
+  },
+  "recall_definition": "Joint recall: both translation and rotation errors must be below the named thresholds.",
+  "uavd4l_intraj": {
+    "dataset": "UAVD4L-LoDv2 in-Traj, LoD3",
+    "frames": 1604,
+    "median_translation_m": 1.28,
+    "median_rotation_deg": 0.68,
+    "recall_percent": {"2m": 75.4, "3m": 90.8, "5m": 97.2}
+  },
+  "uavd4l_outtraj": {
+    "dataset": "UAVD4L-LoDv2 out-of-Traj, LoD3",
+    "frames": 2192,
+    "median_translation_m": 1.26,
+    "median_rotation_deg": 0.69,
+    "recall_percent": {"2m": 80.6, "3m": 95.1, "5m": 99.0}
+  },
+  "swiss_inplace": {
+    "dataset": "Swiss-EPFL-v2 in-Place, LoD2",
+    "frames": 712,
+    "median_translation_m": 3.70,
+    "median_rotation_deg": 1.90,
+    "recall_percent": {"2m": 20.6, "3m": 39.0, "5m": 59.7}
+  },
+  "swiss_outplace": {
+    "dataset": "Swiss-EPFL-v2 out-of-Place, LoD2",
+    "frames": 379,
+    "median_translation_m": 1.98,
+    "median_rotation_deg": 1.21,
+    "recall_percent": {"2m": 48.5, "3m": 72.3, "5m": 89.4}
+  }
+}

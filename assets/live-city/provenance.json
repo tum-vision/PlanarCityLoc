@@ -1,0 +1,37 @@
+{
+  "source_model": {
+    "archive": "release-data",
+    "path": "MODEL/ply/UAVD4L-LoD3.ply",
+    "sha256": "4766025536d8720863bdd3e53f17c398248b248d42d1d99142feeebc90fad809"
+  },
+  "source_query": {
+    "file": "UAVD4L-LoD/inTraj/Query_image/DJI_20231207163021_0232_W.JPG",
+    "sha256": "cf7fe8c5eeeb5a843a5b12f595795cc213023495c993e518bb4474d04ec36ea4"
+  },
+  "source_gt": {
+    "archive": "release-data",
+    "path": "UAVD4L-LoD/inTraj/GT_pose.txt",
+    "sha256": "6722ae643e2b669a7c6bd7cad2e64a9e581a7d9d8a2b36f5b4a380d310ea6806"
+  },
+  "source_intrinsics": {
+    "archive": "release-data",
+    "path": "UAVD4L-LoD/inTraj/intrinsic.txt",
+    "sha256": "25b57b0a34de410dd6f907f4d7e860af86aa4ac01f56f5edd6ce45dd2a026723"
+  },
+  "source_manifest_sha256": "c90a0d177a5e7c3b6ca7f2d1df803e4a5765cc3e5e2f0fc7b66afecb2c68a2c5",
+  "frame": "DJI_20231207163021_0232_W.JPG",
+  "processing": "Keep original LoD3 triangles with centroids inside the central image footprint plus a 12 m XY margin; reindex vertices and subtract a common origin. No mesh simplification or fabricated buildings. Group adjacent coplanar triangles for interactive highlighting. Resize the original query to 960x720.",
+  "pose_animation": "User-controlled camera-x translations relative to dataset GT; illustrated motion, not a recorded solver trajectory. Projected polygons come from the LoD mesh, not a predicted image segmentation.",
+  "sources": [
+    "https://github.com/RingoWRW/UAVD4L",
+    "https://github.com/VictorZoo/LoD-Loc#dataset-preprocessing"
+  ],
+  "terms": "See DATA_PROVENANCE.md. Dataset redistribution permission is not yet confirmed; preserve current private access.",
+  "vertices": 943,
+  "triangles": 1350,
+  "planes": 572,
+  "outputs": {
+    "query.webp": "5ccb058a7460dcfce4f3f06a24b9e5a46ded5ea4a00e51e3e6debb106de0bed5",
+    "scene.json": "940bb11f5820dd879120e5ff68a894968615118a783973692f71c4c6f1c9a962"
+  }
+}

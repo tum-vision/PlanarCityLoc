@@ -1,0 +1,15 @@
+{
+  "source": "PlanarCityLoc paper, figures/pipeline.pdf",
+  "source_sha256": "89bb689ffd0c60d237f70b7d56fa15eb9296372d7e5fc3531d5d1c3fe179b44c",
+  "processing": "Original embedded image objects extracted with pdfimages -png; resized to fit 540x360 preserving aspect ratio and encoded as WebP quality 88. No figure crops or text baked into the pipeline diagram.",
+  "image_objects": {
+    "query-rgb.webp": 112, "query-mask.webp": 110,
+    "query-normals.webp": 108, "query-edges.webp": 106,
+    "query-depth.webp": 104, "query-planes.webp": 113,
+    "lod-model.webp": 83, "rendered-depth.webp": 79,
+    "rendered-mask.webp": 74, "rendered-normals.webp": 69,
+    "rendered-edges.webp": 66, "rendered-planes.webp": 45,
+    "query-overlay.webp": 119
+  },
+  "animation": "Schematic algorithm illustration. Particles, region-growing cells, centroids, camera motion, and ranks are not recorded inference outputs."
+}

@@ -1,0 +1,48 @@
+{
+  "source": "PlanarCityLoc paper, figures/teaser.pdf",
+  "source_sha256": "ed557bf6e75a48b45146074a822380e62df870b87df3ffefb487f95c388c8746",
+  "processing": "Extract embedded image objects with their original soft masks; resize to at most 1100 px, preserving aspect ratio; encode lossless WebP. Extract rendered-mask vector paths and the three original score polylines. No crop of the composed figure.",
+  "animation": "Schematic explanation, not a recorded optimization trajectory. Original paper score curves are conceptual, not measured benchmark values.",
+  "images": {
+    "model.webp": {
+      "object": 68,
+      "soft_mask": 69,
+      "width": 1100,
+      "height": 597,
+      "sha256": "1276bd2cedcb40458e0098e61bf8941b42b7595dedaa6e8e29ef948051c0c759"
+    },
+    "model-planes.webp": {
+      "object": 66,
+      "soft_mask": 67,
+      "width": 1100,
+      "height": 598,
+      "sha256": "3e73a683aa3342838c65f7703e0584a700e090e765cc26f79c0d72d621077b40"
+    },
+    "predicted-mask.webp": {
+      "object": 21,
+      "soft_mask": 0,
+      "width": 1100,
+      "height": 734,
+      "sha256": "0a6f91ba8e43eddbc5d1b8931acf647349c0d608fa0e9507009d0a4de3b50256"
+    },
+    "predicted-planes.webp": {
+      "object": 70,
+      "soft_mask": 0,
+      "width": 1100,
+      "height": 734,
+      "sha256": "1121794ced067025f92e769e1c8c2c38eaf33ddf663bd6584cd91ab87d8d1053"
+    },
+    "rendered-mask.svg": {
+      "drawing_indices": [
+        103,
+        506
+      ],
+      "sha256": "2ee8093b93e5fc7cf21373560974df26d6a7f14d9ea026cd0b098d3c60de9e28"
+    }
+  },
+  "curve_drawing_indices": [
+    66,
+    67,
+    68
+  ]
+}

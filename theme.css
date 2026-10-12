@@ -1,0 +1,64 @@
+:root { color-scheme: light; }
+.theme-toggle { display: inline-grid; place-items: center; flex: none; width: 42px; height: 42px; padding: 10px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: var(--panel); cursor: pointer; }
+.theme-toggle[hidden] { display: none; }
+.theme-toggle:hover { color: var(--cyan); border-color: var(--cyan); }
+.theme-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.theme-sun { display: none; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --accent: #ff665e;
+  --accent-hover: #ff938c;
+  --on-accent: #2c0e0e;
+  --soft: #252528;
+  --selected: #3b2323;
+  --ink: #f5f5f7;
+  --muted: #a1a1a6;
+  --deep: #111114;
+  --panel: #1c1c1e;
+  --line: #3a3a3c;
+  --cyan: var(--accent);
+  --cyan-soft: var(--accent);
+  --orange: #eeb975;
+  --dark-soft: #252528;
+  --dark-selected: var(--selected);
+}
+[data-theme="dark"] .theme-moon { display: none; }
+[data-theme="dark"] .theme-sun { display: block; }
+[data-theme="dark"] .site-header { background: rgba(22, 22, 23, .88); box-shadow: 0 8px 28px #0002; }
+[data-theme="dark"] .authors a { color: var(--cyan); border-color: #49494d; }
+[data-theme="dark"] :is(.signal-strip, .landscape-card, .resource-grid a, .pipeline-explorer, .table-scroll, .comparison-card) { background: var(--panel); }
+[data-theme="dark"] :is(.pipeline-toolbar button, .pipeline-stage-buttons button, .dataset-tabs button, .field select, .sample-tabs button, .sample-navigation button),
+[data-theme="dark"] #comparison-swap { background: var(--panel); }
+[data-theme="dark"] :is(.pipeline-toolbar button:hover, .results-table th button:hover, .results-table tbody tr:hover) { background: var(--dark-soft); }
+[data-theme="dark"] .pipeline-stage-buttons button[aria-pressed="true"] { background: var(--dark-selected); }
+[data-theme="dark"] .dataset-tabs button[aria-pressed="true"] { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+[data-theme="dark"] :is(.button.primary, .mode-switch button.active) { background: var(--accent); color: var(--on-accent); }
+[data-theme="dark"] .button.primary:hover { background: var(--accent-hover); }
+[data-theme="dark"] .button.muted { color: #a1a1a6; background: #252528; }
+[data-theme="dark"] .landscape-card svg text { fill: var(--muted); }
+[data-theme="dark"] :is(.sample-tabs img, .comparison-stage, .results-table thead) { background: var(--dark-soft); }
+[data-theme="dark"] :is(.results-table th, .results-table td) { border-color: var(--line); }
+[data-theme="dark"] .results-table th[aria-sort]:not([aria-sort="none"]) { background: var(--dark-selected); }
+[data-theme="dark"] .results-table .ours { background: var(--selected); }
+[data-theme="dark"] .results-table .ours th { color: #ffaaa0; }
+[data-theme="dark"] .sample-navigation button:disabled { color: #909096; }
+[data-theme="dark"] .code-card { background: #151516; }
+/* Recolor diagram UI geometry only. Keep measured image pixels and class colors intact. */
+[data-theme="dark"] .pipeline-svg text { fill: var(--ink); }
+[data-theme="dark"] .pipeline-svg .p-small { fill: var(--muted); }
+[data-theme="dark"] .pipeline-svg .p-pose-label { fill: var(--cyan); }
+[data-theme="dark"] :is(.p-panel-bg, .p-input-bg, .p-candidate) { fill: var(--panel); stroke: var(--line); }
+[data-theme="dark"] .p-panel.is-active .p-panel-bg { fill: #302020; stroke: var(--cyan); }
+[data-theme="dark"] .p-renderer-bg { fill: #24262b; stroke: var(--line); }
+[data-theme="dark"] :is(.p-node, .p-renderer-node, .p-model-box, .p-operator) { fill: #392c2b; stroke: #80645f; }
+[data-theme="dark"] .p-candidate.is-ready { fill: #412a27; stroke: #a26c62; }
+[data-theme="dark"] .p-neuron { fill: var(--cyan); }
+[data-theme="dark"] .p-neuron-link { stroke: #b79b95; }
+[data-theme="dark"] .p-grid-frame { stroke: #91756e; }
+[data-theme="dark"] .p-particle { fill: #ffb4a8; }
+[data-theme="dark"] .p-particle-amber { fill: var(--orange); }
+[data-theme="dark"] .p-camera-plane { fill: #5b3631; }
+[data-theme="dark"] .pipeline-svg .p-rank-digit { fill: #42302d; }
+[data-theme="dark"] #pipeline-arrow path { stroke: #c2aaa4; }
+[data-theme="dark"] #pipeline-loop-arrow path { stroke: var(--cyan); }
+@media (max-width: 560px) { .site-header { gap: 18px; } }
