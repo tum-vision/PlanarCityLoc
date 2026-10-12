@@ -8,29 +8,88 @@
     "4": "University of Cambridge",
     "5": "ETH Zürich",
     "6": "Munich Center for Machine Learning",
-    "7": "BMW Group",
-    "8": "Microsoft",
-    "9": "Konrad Zuse School of Excellence in Reliable AI (relAI)"
+    "7": "Konrad Zuse School of Excellence in Reliable AI (relAI)",
+    "8": "BMW Group",
+    "9": "Microsoft"
   },
   "author_affiliations": {
-    "Oussema Dhaouadi": [1, 2, 4, 5, 6],
-    "Shao Jie Hu Chen": [1, 2],
-    "Jakob Gollreiter": [1, 2],
-    "Samir Jusufi": [1, 3],
-    "Nikolas Rieger": [1, 2, 9],
-    "Caroline Wendlandt": [1, 2],
-    "Christian Wender": [1, 7],
-    "Jingfeng Mao": [2, 4],
-    "Guangming Wang": [4],
-    "Zuria Bauer": [5],
-    "Marc Pollefeys": [5, 8],
-    "Daniel Cremers": [2, 6],
-    "Olaf Wysocki": [4]
+    "Oussema Dhaouadi": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "Shao Jie Hu Chen": [
+      1,
+      2
+    ],
+    "Jakob Gollreiter": [
+      1,
+      2
+    ],
+    "Samir Jusufi": [
+      1,
+      3
+    ],
+    "Nikolas Rieger": [
+      1,
+      2,
+      7
+    ],
+    "Caroline Wendlandt": [
+      1,
+      2
+    ],
+    "Christian Wender": [
+      1,
+      8
+    ],
+    "Jingfeng Mao": [
+      2,
+      4
+    ],
+    "Guangming Wang": [
+      4
+    ],
+    "Zuria Bauer": [
+      5
+    ],
+    "Marc Pollefeys": [
+      5,
+      9
+    ],
+    "Daniel Cremers": [
+      2,
+      6
+    ],
+    "Olaf Wysocki": [
+      4
+    ]
   },
   "author_affiliation_sources": {
-    "project_author_provided": ["Shao Jie Hu Chen", "Jakob Gollreiter", "Samir Jusufi", "Nikolas Rieger", "Caroline Wendlandt", "Christian Wender", "Jingfeng Mao", "Guangming Wang"],
-    "project_author_additions": {"Oussema Dhaouadi": ["TUM.ai"]},
-    "orthotrack_project_page": ["Oussema Dhaouadi", "Zuria Bauer", "Marc Pollefeys", "Daniel Cremers", "Olaf Wysocki"]
+    "project_author_provided": [
+      "Shao Jie Hu Chen",
+      "Jakob Gollreiter",
+      "Samir Jusufi",
+      "Nikolas Rieger",
+      "Caroline Wendlandt",
+      "Christian Wender",
+      "Jingfeng Mao",
+      "Guangming Wang"
+    ],
+    "project_author_additions": {
+      "Oussema Dhaouadi": [
+        "TUM.ai"
+      ]
+    },
+    "orthotrack_project_page": [
+      "Oussema Dhaouadi",
+      "Zuria Bauer",
+      "Marc Pollefeys",
+      "Daniel Cremers",
+      "Olaf Wysocki"
+    ]
   },
   "assets": {
     "eth-zurich.svg": "https://ethz.ch/etc/designs/ethz/img/header/ethz_logo_white.svg",
@@ -45,7 +104,8 @@
     "tum-ai-color.svg": "https://upload.wikimedia.org/wikipedia/commons/a/a2/TUM.ai_Logo_Blue_%26_Violet.svg",
     "tum-ai-color-dark.svg": "Derived from tum-ai-color.svg: black fills and stroke changed to white for dark backgrounds; geometry and gradient unchanged.",
     "lmu.svg": "https://cms-cdn.lmu.de/assets/img/Logo_LMU.svg",
-    "bmw-group.svg": "https://www.bmwgroup.com/etc.clientlibs/grpw-web/clientlibs/grpw-base/resources/images/logo/BMWGroup_dark.svg"
+    "bmw-group.svg": "https://www.bmwgroup.com/etc.clientlibs/grpw-web/clientlibs/grpw-base/resources/images/logo/BMWGroup_dark.svg",
+    "relai.jpg": "https://zuseschoolrelai.de/wp-content/uploads/2022/09/TUM_RelAI-Logo_800px.jpg"
   },
   "colored_logo_references": {
     "tum-blue.svg": "https://commons.wikimedia.org/wiki/File:Logo_of_the_Technical_University_of_Munich.svg",
