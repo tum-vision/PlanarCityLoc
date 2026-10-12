@@ -20,13 +20,13 @@
   <a href="https://www.linkedin.com/in/shaojiehuchen/">Shao Jie Hu Chen</a><sup>1,2</sup> &nbsp;
   <a href="https://www.linkedin.com/in/jakob-gollreiter-939615194/">Jakob Gollreiter</a><sup>1,2</sup><br>
   <a href="https://www.linkedin.com/in/samir-jusufi/">Samir Jusufi</a><sup>1,3</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/nikolas-rieger/">Nikolas Rieger</a><sup>1,2,9</sup> &nbsp;
+  <a href="https://www.linkedin.com/in/nikolas-rieger/">Nikolas Rieger</a><sup>1,2,7</sup> &nbsp;
   <a href="https://www.linkedin.com/in/caroline-wendlandt/">Caroline Wendlandt</a><sup>1,2</sup><br>
-  <a href="https://www.linkedin.com/in/christian-wender/">Christian Wender</a><sup>1,7</sup> &nbsp;
+  <a href="https://www.linkedin.com/in/christian-wender/">Christian Wender</a><sup>1,8</sup> &nbsp;
   <a href="https://www.linkedin.com/in/jingfeng-mao-125928260/">Jingfeng Mao</a><sup>2,4</sup> &nbsp;
   <a href="https://www.linkedin.com/in/guangming-wang/">Guangming Wang</a><sup>4</sup><br>
   <a href="https://zuriabauer.com/">Zuria Bauer</a><sup>5</sup> &nbsp;
-  <a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup>5,8</sup> &nbsp;
+  <a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup>5,9</sup> &nbsp;
   <a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup>2,6</sup> &nbsp;
   <a href="https://olafwysocki.github.io/">Olaf Wysocki</a><sup>4</sup>
 </p>
@@ -34,8 +34,9 @@
 <p>
   <sup>1</sup> TUM.ai &nbsp; <sup>2</sup> Technical University of Munich &nbsp; <sup>3</sup> LMU Munich<br>
   <sup>4</sup> University of Cambridge &nbsp; <sup>5</sup> ETH Zürich<br>
-  <sup>6</sup> Munich Center for Machine Learning &nbsp; <sup>7</sup> BMW Group &nbsp; <sup>8</sup> Microsoft<br>
-  <sup>9</sup> <a href="https://zuseschoolrelai.de/">Konrad Zuse School of Excellence in Reliable AI (relAI)</a>
+  <sup>6</sup> Munich Center for Machine Learning<br>
+  <sup>7</sup> <a href="https://zuseschoolrelai.de/">Konrad Zuse School of Excellence in Reliable AI (relAI)</a><br>
+  <sup>8</sup> BMW Group &nbsp; <sup>9</sup> Microsoft
 </p>
 
 </div>
