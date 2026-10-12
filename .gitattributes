@@ -1,0 +1,3 @@
+# Evaluation artifacts are byte-exact and must not be line-ending normalized.
+# Some upstream pose files intentionally contain trailing spaces.
+data/** -text -whitespace

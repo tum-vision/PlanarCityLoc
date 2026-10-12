@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.Python
+
+# Secrets / local env
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# IDE / agent
+.vscode/
+.idea/
+.claude/
+.cursor/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+.nfs*
+
+# Query images / checkpoints / outputs
+data/**/Query_image
+data/**/Query_image/
+data/**/Query_image_full
+data/**/Query_image_full/
+data/**/images
+data/**/images/
+data/**/Synthesis/
+data/**/GT_pose/
+data/**/GPS_pose/
+# Dataset assets remain with their original providers.
+/data/MODEL/ply/*.ply
+/data/Swiss-EPFL/**/*.txt
+/data/Swiss-EPFL/split/*.json
+/data/UAVD4L-LoD/**/*.txt
+/checkpoints
+checkpoints/
+outputs/
+results/
+tmp/
+tmp_*/
+wandb/
+runs/
+*.log
+logs/
+slurm/logs/
+*.out
+*.err
+
+# Model weights and additional geometry that may be downloaded locally
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+*.onnx
+*.obj
+
+# Local-only paper TeX / figure automation
+paper_scripts/
+/paper/
+# The static project page is published from its own branch.
+/project_page/
+
+# Scratch
+scratch_*.py
+scratch*.py

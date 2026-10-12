@@ -1,0 +1,293 @@
+{
+  "status": "independently_pose_audited_full_main_evaluations",
+  "scope": "Full-split main evaluation metrics and stage evidence.",
+  "protocol_file": "configs/evaluation_camera_ready_v2.json",
+  "recall_definition": "translation_m < threshold AND rotation_deg < threshold; all queries in denominator",
+  "stages": {
+    "cv": "coarse search",
+    "pf": "particle filter",
+    "final": "fixed selection from PF and plane-PnP candidates"
+  },
+  "profiles": {
+    "uavd4l_intraj": {
+      "query_list_sha256": "de1c83a55cf3b1f3f8a2e815a9b7d6233bde948913476ec8b8cb3805ab20cf4a",
+      "gpu": "NVIDIA H100 NVL, 95830 MiB, 615.71.09",
+      "map": "LoD3",
+      "manifest_sha256": "12415f02448119114dd5a7b839e65328c825a93caad7f5023f4511b1f9131417",
+      "metrics_sha256": "19400f6de18f61c9da206742e7b3805a6bbe3179641d046b7cf14ba4fe328413",
+      "candidates_sha256": "629c956eaea509b6d3b4b473a53baaf68ad03c735a0eaa00f7d3a076fdfef17f",
+      "stages": {
+        "cv": {
+          "n_queries": 1604,
+          "n_failed": 0,
+          "median_translation_m": 2.623626478761369,
+          "median_rotation_deg": 1.489662702092536,
+          "joint_recall_percent": {
+            "1": 1.4339152119700749,
+            "2": 27.556109725685786,
+            "3": 59.85037406483791,
+            "5": 79.42643391521197
+          },
+          "translation_only_recall_percent": {
+            "1": 2.493765586034913,
+            "2": 28.241895261845386,
+            "3": 59.97506234413965,
+            "5": 80.0498753117207
+          }
+        },
+        "pf": {
+          "n_queries": 1604,
+          "n_failed": 0,
+          "median_translation_m": 2.3576655905438155,
+          "median_rotation_deg": 1.300458259767066,
+          "joint_recall_percent": {
+            "1": 3.054862842892768,
+            "2": 35.97256857855361,
+            "3": 67.70573566084788,
+            "5": 82.7930174563591
+          },
+          "translation_only_recall_percent": {
+            "1": 3.2418952618453867,
+            "2": 36.09725685785536,
+            "3": 67.76807980049875,
+            "5": 82.85536159600998
+          }
+        },
+        "final": {
+          "n_queries": 1604,
+          "n_failed": 0,
+          "median_translation_m": 1.2849435810884562,
+          "median_rotation_deg": 0.6830911117078861,
+          "joint_recall_percent": {
+            "1": 36.34663341645885,
+            "2": 75.43640897755611,
+            "3": 90.83541147132169,
+            "5": 97.19451371571073
+          },
+          "translation_only_recall_percent": {
+            "1": 36.34663341645885,
+            "2": 75.43640897755611,
+            "3": 90.83541147132169,
+            "5": 97.2568578553616
+          }
+        }
+      },
+      "wall_inference_s": {
+        "mean": 6.421643220242754,
+        "median": 6.008433942042757,
+        "p95": 11.245308620965806,
+        "n": 1604
+      }
+    },
+    "uavd4l_outtraj": {
+      "query_list_sha256": "39ffd809ced9b7bde79d94ba19dc08923380ccffa65342106f57592f3d119b90",
+      "gpu": "NVIDIA H100 NVL, 95830 MiB, 615.71.09",
+      "map": "LoD3",
+      "manifest_sha256": "41d60827819b23c06667e7fccde4c3a68381970540731cdd5e2a553a573eec64",
+      "metrics_sha256": "faa008aeba2ef0ff8e94ba716b5b05cf46b461fdbf6fe64d0356dad583e78f9f",
+      "candidates_sha256": "fa89810021838ce4ea22617fd080268c2d5c9daf1c5a01a55659a4d551c5e9de",
+      "stages": {
+        "cv": {
+          "n_queries": 2192,
+          "n_failed": 0,
+          "median_translation_m": 2.3482384865535897,
+          "median_rotation_deg": 1.221159176592836,
+          "joint_recall_percent": {
+            "1": 2.737226277372263,
+            "2": 34.94525547445255,
+            "3": 74.08759124087592,
+            "5": 95.30109489051095
+          },
+          "translation_only_recall_percent": {
+            "1": 7.664233576642336,
+            "2": 35.31021897810219,
+            "3": 74.17883211678831,
+            "5": 95.34671532846716
+          }
+        },
+        "pf": {
+          "n_queries": 2192,
+          "n_failed": 0,
+          "median_translation_m": 1.8082534704973838,
+          "median_rotation_deg": 0.9839632801051702,
+          "joint_recall_percent": {
+            "1": 8.75912408759124,
+            "2": 60.76642335766424,
+            "3": 90.55656934306569,
+            "5": 98.54014598540147
+          },
+          "translation_only_recall_percent": {
+            "1": 10.127737226277372,
+            "2": 60.76642335766424,
+            "3": 90.55656934306569,
+            "5": 98.54014598540147
+          }
+        },
+        "final": {
+          "n_queries": 2192,
+          "n_failed": 0,
+          "median_translation_m": 1.2582413942585435,
+          "median_rotation_deg": 0.693863292537062,
+          "joint_recall_percent": {
+            "1": 35.49270072992701,
+            "2": 80.56569343065694,
+            "3": 95.11861313868614,
+            "5": 99.0419708029197
+          },
+          "translation_only_recall_percent": {
+            "1": 35.72080291970803,
+            "2": 80.70255474452554,
+            "3": 95.25547445255475,
+            "5": 99.0419708029197
+          }
+        }
+      },
+      "wall_inference_s": {
+        "mean": 6.4059345358463275,
+        "median": 6.037148691073526,
+        "p95": 10.38920936391805,
+        "n": 2192
+      }
+    },
+    "swiss_inplace": {
+      "query_list_sha256": "fc1017bbeeaf66c4328270802f474b882b087a7c737e7e5b3900a20c7a31cfc8",
+      "gpu": "NVIDIA A40, 46068 MiB, 615.71.09",
+      "map": "LoD2",
+      "manifest_sha256": "c0a0359404d514cadf34d5281a4f49707140d44cfa29b6afc14cb3488c386a67",
+      "metrics_sha256": "7ff2204a4d5b430ee02376b095bf100a71aee9dddadb09c51f1dc4155a7d357b",
+      "candidates_sha256": "b1b87a75476ac2c0a6014e8ed08f5d78d1582723477d48b4a065f115307c42e1",
+      "stages": {
+        "cv": {
+          "n_queries": 712,
+          "n_failed": 0,
+          "median_translation_m": 5.041143058804758,
+          "median_rotation_deg": 1.7207749862615662,
+          "joint_recall_percent": {
+            "1": 2.528089887640449,
+            "2": 15.44943820224719,
+            "3": 30.196629213483146,
+            "5": 48.735955056179776
+          },
+          "translation_only_recall_percent": {
+            "1": 4.775280898876404,
+            "2": 16.573033707865168,
+            "3": 30.61797752808989,
+            "5": 49.29775280898877
+          }
+        },
+        "pf": {
+          "n_queries": 712,
+          "n_failed": 0,
+          "median_translation_m": 3.5448079971414304,
+          "median_rotation_deg": 1.5378577055866571,
+          "joint_recall_percent": {
+            "1": 5.196629213483146,
+            "2": 24.859550561797754,
+            "3": 41.57303370786517,
+            "5": 61.79775280898876
+          },
+          "translation_only_recall_percent": {
+            "1": 7.584269662921349,
+            "2": 26.54494382022472,
+            "3": 42.2752808988764,
+            "5": 62.07865168539326
+          }
+        },
+        "final": {
+          "n_queries": 712,
+          "n_failed": 0,
+          "median_translation_m": 3.6993337601577068,
+          "median_rotation_deg": 1.8995383277244042,
+          "joint_recall_percent": {
+            "1": 4.353932584269663,
+            "2": 20.646067415730336,
+            "3": 39.04494382022472,
+            "5": 59.69101123595506
+          },
+          "translation_only_recall_percent": {
+            "1": 7.724719101123595,
+            "2": 22.6123595505618,
+            "3": 40.168539325842694,
+            "5": 59.97191011235955
+          }
+        }
+      },
+      "wall_inference_s": {
+        "mean": 8.753332183523833,
+        "median": 8.845451060507912,
+        "p95": 10.86980464265216,
+        "n": 712
+      }
+    },
+    "swiss_outplace": {
+      "query_list_sha256": "22aeb43d616d191dfee04207a3bf86ca67513defa8f1b863c25ec0674d2847a2",
+      "gpu": "NVIDIA H100 NVL, 95830 MiB, 615.71.09",
+      "map": "LoD2",
+      "manifest_sha256": "4c9cc8c47c2fabf4cd213475f18f851b1343b3f030efe91900c4905f310de1dd",
+      "metrics_sha256": "ebd0e186a8a9ed15bceebe1fb30b3f919d3a95061df2821bfcf2dda4c68f6e1b",
+      "candidates_sha256": "47ed6b00e3270e0208d2e132c3820a8c8886f02a15e378e94614f270ec71317d",
+      "stages": {
+        "cv": {
+          "n_queries": 379,
+          "n_failed": 0,
+          "median_translation_m": 4.418421920172091,
+          "median_rotation_deg": 1.4068052563871876,
+          "joint_recall_percent": {
+            "1": 1.0554089709762533,
+            "2": 11.345646437994723,
+            "3": 23.218997361477573,
+            "5": 57.519788918205805
+          },
+          "translation_only_recall_percent": {
+            "1": 1.58311345646438,
+            "2": 12.137203166226913,
+            "3": 23.482849604221638,
+            "5": 58.04749340369393
+          }
+        },
+        "pf": {
+          "n_queries": 379,
+          "n_failed": 0,
+          "median_translation_m": 3.991676885671608,
+          "median_rotation_deg": 1.2254800891894624,
+          "joint_recall_percent": {
+            "1": 1.3192612137203166,
+            "2": 14.511873350923482,
+            "3": 31.13456464379947,
+            "5": 70.18469656992085
+          },
+          "translation_only_recall_percent": {
+            "1": 2.1108179419525066,
+            "2": 14.511873350923482,
+            "3": 31.13456464379947,
+            "5": 70.18469656992085
+          }
+        },
+        "final": {
+          "n_queries": 379,
+          "n_failed": 0,
+          "median_translation_m": 1.9808890701461306,
+          "median_rotation_deg": 1.2112775144140777,
+          "joint_recall_percent": {
+            "1": 7.9155672823219,
+            "2": 48.54881266490765,
+            "3": 72.29551451187335,
+            "5": 89.44591029023746
+          },
+          "translation_only_recall_percent": {
+            "1": 13.984168865435356,
+            "2": 50.65963060686016,
+            "3": 72.29551451187335,
+            "5": 89.44591029023746
+          }
+        }
+      },
+      "wall_inference_s": {
+        "mean": 4.417638223629634,
+        "median": 4.124727942049503,
+        "p95": 7.549732858117203,
+        "n": 379
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# Swiss-EPFL inPlace — wide z grid (GPS |dz| up to ~30 m).
+
+name: swiss_epfl_inPlace
+profile: wide
+
+cv_grid:
+  large:
+    range_xyz_deg: {x: 64.0, y: 64.0, z: 64.0, yaw_deg: 16.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 11, yaw_deg: 9}
+  small:
+    range_xyz_deg: {x: 10.0, y: 10.0, z: 15.0, yaw_deg: 8.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 9, yaw_deg: 5}
+
+cv:
+  depth_gated: false
+  mask_iou_mode: union
+  iou_weight: 0.1
+  edge_weight: 0.6
+  depth_weight: 0.3

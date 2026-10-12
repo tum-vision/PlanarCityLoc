@@ -1,0 +1,27 @@
+{
+  "protocol": "camera-ready-v2-equal-rank-estimated-plane-gate-no-cross-render-index-retention",
+  "declared_on": "2026-10-08",
+  "status": "camera_ready_main_evaluation",
+  "cross_render_inlier_retention": false,
+  "inlier_retention_reason": "Rendered plane IDs are sequential connected-component indices recomputed on every view; they are not stable physical-plane identities. RANSAC rejection and within-fit nonlinear refinement remain enabled.",
+  "strict_gate": {
+    "reference_pose": "particle_filter_estimate",
+    "predicted_to_rendered_plane_count_threshold": 1.25,
+    "zero_rendered_planes": "ordinary_matching",
+    "ground_truth_input": false
+  },
+  "selection": {
+    "features": ["score", "rec", "iou", "edge", "depth_ncc", "negative_normal_error", "negative_reprojection_error", "negative_centroid_distance"],
+    "weights": [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
+    "feature_ties": "average_rank",
+    "missing_or_nonfinite": "tied_worst_rank",
+    "aggregate_ties": "first_candidate_PF_then_A1_B1_etc",
+    "tuning": "none_for_this_rule"
+  },
+  "main_splits": {"uavd4l_inTraj": 1604, "uavd4l_outTraj": 2192, "swiss_epfl_inPlace": 712, "swiss_epfl_outPlace": 379},
+  "render_hw": [480, 640],
+  "batch_size": 512,
+  "mesh_crop": false,
+  "model_training": "off-the-shelf checkpoints; no new training",
+  "reporting": "Report every query, failures, and the run manifest using strict joint translation and rotation thresholds."
+}

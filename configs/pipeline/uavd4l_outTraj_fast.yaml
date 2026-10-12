@@ -1,0 +1,50 @@
+# Faster UAVD4L outTraj grid. Not used by paper tables — see uavd4l_outTraj.yaml.
+
+name: uavd4l_outTraj_fast
+profile: fast_wide
+
+render:
+  h: 384
+  w: 512
+
+moge:
+  mode: sam3_moge2
+  enc_res: 448
+
+cv:
+  mask_size: [168, 128]
+  batch_size: 512
+  iou_weight: 0.5
+  edge_weight: 0.25
+  depth_weight: 0.25
+  depth_gated: true
+
+cv_grid:
+  large:
+    range_xyz_deg: {x: 40.0, y: 40.0, z: 60.0, yaw_deg: 20.0}
+    samples_xyz_deg: {x: 7, y: 7, z: 7, yaw_deg: 7}
+  small:
+    range_xyz_deg: {x: 15.0, y: 15.0, z: 20.0, yaw_deg: 8.0, pitch_deg: 0.0, roll_deg: 0.0}
+    samples_xyz_deg: {x: 5, y: 5, z: 5, yaw_deg: 3, pitch_deg: 1, roll_deg: 1}
+
+pnp:
+  n_ab_iters: 3
+
+particle_filter:
+  stages:
+    - name: medium
+      mask_size: [168, 224]
+      sigma_trans: 8.0
+      sigma_yaw_deg: 5.0
+      n_iter: 10
+      n_beams: 3
+      n_candidates: 40
+      gamma: 0.2
+    - name: fine
+      mask_size: [252, 336]
+      sigma_trans: 2.0
+      sigma_yaw_deg: 2.0
+      n_iter: 4
+      n_beams: 2
+      n_candidates: 32
+      gamma: 0.3

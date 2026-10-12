@@ -1,0 +1,4 @@
+name: depth_only
+segmentation:
+  gt_normal_cos: -1.0
+  pred_normal_cos: -1.0

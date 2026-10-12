@@ -1,0 +1,12 @@
+# Swiss-EPFL outPlace — wide z grid (GPS |dz| up to ~30 m).
+
+name: swiss_epfl_outPlace
+profile: wide
+
+cv_grid:
+  large:
+    range_xyz_deg: {x: 40.0, y: 40.0, z: 60.0, yaw_deg: 20.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 9, yaw_deg: 9}
+  small:
+    range_xyz_deg: {x: 15.0, y: 15.0, z: 20.0, yaw_deg: 8.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 9, yaw_deg: 5}

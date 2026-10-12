@@ -1,0 +1,4 @@
+name: normals_only
+segmentation:
+  gt_depth_rel: 100.0
+  pred_depth_rel: 100.0

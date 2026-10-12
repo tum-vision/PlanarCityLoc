@@ -1,0 +1,121 @@
+# Shared pipeline defaults (merged with a profile yaml).
+
+name: base
+
+render:
+  h: 480
+  w: 640
+
+cv:
+  mask_size: [301, 224]
+  iou_weight: 0.3
+  edge_weight: 0.2
+  depth_weight: 0.5
+  edge_thresh: 0.3
+  xy_pad_m: 40.0
+  batch_size: 256
+  # Stricter than PF/PnP: union penalises wrong-z hypotheses that cover pred mask
+  # with extra LoD geometry (pred_recall can score rec=1.0 at ~50–70 m TE on outTraj).
+  mask_iou_mode: union
+  # Gate appearance score by depth alignment (blocks wrong-z hypotheses with high mask overlap).
+  depth_gated: true
+  # 1D z sweep at GPS xy/yaw before 4D grid (wide-z profiles only).
+  z_prescreen_min_z_range: 0.0
+  z_prescreen_samples: 15
+  # Widen stage-1/2 yaw grid when GPS silhouette poorly covers the pred mask.
+  expand_yaw_gps_mask_thresh: 0.55
+  yaw_deg_large_expanded: 40.0
+  yaw_deg_small_expanded: 16.0
+  yaw_samples_large_expanded: 15
+  yaw_samples_small_expanded: 7
+
+segmentation:
+  gt_normal_cos: 0.995
+  gt_depth_rel: 0.02
+  pred_normal_cos: 0.995
+  pred_depth_rel: 0.05
+  min_pixels: 50
+  mask_thresh: 0.5
+  iou_thresh: 0.5
+  mask_iou_mode: pred_recall   # union | pred_recall (latter ignores extra LoD buildings)
+  low_mask_frac: 0.08          # below: conservative PF + skip PnP
+
+pnp:
+  ab_mode: both
+  # Sequential image-region IDs are not stable plane identities across renders.
+  # Retaining them can select unrelated surfaces; the camera-ready default refits
+  # correspondences at every iteration and retains only within-fit RANSAC inliers.
+  retain_inliers: false
+  n_ab_iters: 5
+  stop_thresh_m: 5.0
+  reproj_scale: 5.0
+  min_normal_cos: 0.7
+  # Compare predicted planes with map planes rendered at the estimated PF pose.
+  strict_pred_rendered_ratio: 1.25
+  strict_min_overlap_px: 15
+  strict_min_vote_frac: 0.55
+  strict_min_normal_cos: 0.85
+  strict_min_matches: 10
+  strict_reproj_px: 12.0
+  strict_b_max_dist_px: 70.0
+  strict_b_lowe_ratio: 0.6
+  strict_max_step_m: 1.5    # abort PnP if any A-iter step exceeds this
+  skip_below_mask_frac: 0.08  # skip PnP when MoGe building mask is tiny
+
+particle_filter:
+  iou_weight: 0.3
+  edge_weight: 0.2
+  depth_weight: 0.5
+  seed: 0
+  low_mask_max_drift_m: 2.0   # snap PF back to CV init if drift exceeds on low-mask frames
+  # After cost-volume init: skip σ=30m coarse PF (CV already did global search).
+  stages:
+    - name: medium
+      mask_size: [224, 304]
+      sigma_trans: 8.0
+      sigma_yaw_deg: 5.0
+      n_iter: 15
+      n_beams: 4
+      n_candidates: 60
+      gamma: 0.2
+    - name: fine
+      mask_size: [336, 456]
+      sigma_trans: 2.0
+      sigma_yaw_deg: 2.0
+      n_iter: 6
+      n_beams: 2
+      n_candidates: 52
+      gamma: 0.3
+
+pose_selection:
+  edt_eps_px: 0.5
+  reproj_eps_px: 5.0        # shared: reproj ≤ min(A reproj) + this
+  reproj_abs_max_px: 6.0    # …capped at this (A and B use the same threshold)
+  b_top_iou_margin: 0.008   # legacy (unused by B-chain selector)
+  iou_margin: 0.02          # fallback margin when no B-iters survive
+  # B-chain early-stop (walk B1…B5 by composite score trend)
+  b_score_uptick: 0.001     # score increase → overshoot, stop at plateau
+  b_score_cliff: 0.01       # large score drop → matching broke, stop
+  b_score_flat: 0.005       # flat B scores → pick min-reproj B
+  b_reproj_plateau_px: 0.2  # on flat plateau, earliest B within this of min reproj
+  pnp_trust_margin: 0.01    # prefer B over PF when within this composite gap
+  a_over_b_margin: 0.01     # include best A only if it beats B_sel by this much (or tied)
+  cdist_lambda: 0.0         # legacy (tie-set now uses min reproj, not cDist)
+  cdist_missing_penalty: 1.0
+  tie_eps: 0.007            # tie-set: keep candidates with S_top - S_i < tie_eps
+
+moge:
+  mode: sam3_moge2  # moge2 or sam3_moge2
+  ckpt: checkpoints/moge2/best.ckpt
+  sam3_ckpt: checkpoints/sam3/sam3_building.pt
+  moge_vits_model: Ruicheng/moge-2-vits-normal
+  moge_vits_revision: 679230677b4d282c6f304189a93e98e14f085902
+  enc_res: 640
+
+mesh:
+  uavd4l: data/MODEL/ply/UAVD4L-LoD3.ply
+  swiss_epfl: data/MODEL/ply/Swiss-EPFL-LoD2.ply
+
+crop:
+  margin: 3.0
+  extend_m: 50.0

@@ -1,0 +1,12 @@
+# ACCIDENTAL CONFIG REPRO ONLY (Jun 2025 yaml bug: 6-DoF in stage-2 small CV).
+# For rotation prior-noise ablations use --perturb_gt_r + --all_6D instead (stage-1 large only).
+# Example:
+#   pipeline.py --dataset uavd4l --data_root data/UAVD4L-LoD/inTraj \
+#     --config legacy/uavd4l_inTraj_stage2_6dof.yaml ...
+
+name: uavd4l_inTraj_stage2_6dof_legacy
+
+cv_grid:
+  small:
+    range_xyz_deg: {x: 10.0, y: 10.0, z: 10.0, yaw_deg: 5.0, pitch_deg: 5.0, roll_deg: 5.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 9, yaw_deg: 3, pitch_deg: 3, roll_deg: 3}

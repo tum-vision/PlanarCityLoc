@@ -1,0 +1,5 @@
+name: moge2_vitl
+moge:
+  mode: sam3_moge2
+  moge_vits_model: Ruicheng/moge-2-vitl-normal
+  moge_vits_revision: b135031bae30b5ac2ae141a0e68717795ce38340

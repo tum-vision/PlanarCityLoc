@@ -1,0 +1,17 @@
+{
+  "declared_on": "2026-10-08",
+  "protocol": "camera-ready-v2",
+  "selection_rule": "Fixed equal-weight ranks; no selection or tuning based on these results",
+  "full_splits": ["UAVD4L inTraj LoD3", "UAVD4L outTraj LoD3", "Swiss inPlace LoD2", "Swiss outPlace LoD2", "UAVD4L inTraj LoD1", "UAVD4L outTraj LoD1"],
+  "component_subset": {"frames_per_uav_split": 100, "random_seed": 42, "same_queries_for_every_variant": true},
+  "component_execution_hardware": {"inTraj": "NVIDIA RTX A6000", "outTraj": "NVIDIA A40"},
+  "hardware_scope": "Use the per-split hardware and sample counts recorded in this configuration. Match device types within each comparison and retain the run manifest.",
+  "component_variants": ["baseline", "score_iou_only", "score_iou_edge", "score_iou_depth", "normals_only", "depth_only", "pnp_overlap_only", "pnp_centroid_only", "pnp_legacy_region_filter", "seg_eomt"],
+  "coarse_cue_scope": "Score-cue variants alter CV and PF only; final candidate composite-score weights stay at the unablated dataset profile. candidate_scoring_settings.json records them. This isolation was fixed before those variant runs.",
+  "normal_predictors": ["moge2-vits", "moge2-vitb", "moge2-vitl", "metric3dv2-vits", "metric3dv2-vitl", "metric3dv2-vitg"],
+  "normal_predictor_scope": "Use the same 100-query subset for each predictor. MoGe variants share preprocessing and pinned checkpoints. Metric3D uses official centered mean-color padding and focal-length-scaled metric depth with the released range clamp. The conversion uses neither GT depth nor GT pose.",
+  "map_completeness": {"same_100_query_subset": true, "variants": ["intact", "remove_small", "remove_middle", "remove_large"], "ranking": "visible projected area at sensor prior, not GT", "fewer_than_three_eligible_buildings": "do not remove a building; report these cases explicitly"},
+  "synthetic_prior_noise": {"frames_per_uav_split": 300, "seed": 42, "translation_yaw_pairs": [[10,10],[20,20],[30,30]], "distribution": "independent uniform translation components and Euler angle perturbations; roll/pitch clipped to +/-5 degrees", "search": "explicitly expanded grid and PF search, as implemented in ablation runner", "native_prior_comparison": "same 300 queries with native priors, native solver profile and matched per-split GPU model; not an unperturbed-GT point"},
+  "pose_selection_ablation": "Use saved candidates on full splits. Compare PF, max IoU, max edge, max composite and fixed rank. Do not tune a new selector.",
+  "reporting": "Recompute all values using strict joint translation/rotation thresholds. Report failures and coverage; omit or clearly mark experiments that cannot be verified, never invent numbers."
+}

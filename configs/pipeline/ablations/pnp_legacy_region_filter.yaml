@@ -1,0 +1,5 @@
+name: pnp_legacy_region_filter
+# Diagnostic only: former cross-render ordinal-region filter, not reliable
+# physical-plane tracking. Never call this an inlier-retention guarantee.
+pnp:
+  retain_inliers: true

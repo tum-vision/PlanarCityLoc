@@ -1,0 +1,7 @@
+name: score_iou_only
+cv:
+  edge_weight: 0.0
+  depth_weight: 0.0
+particle_filter:
+  edge_weight: 0.0
+  depth_weight: 0.0

@@ -1,0 +1,29 @@
+# Paper UAVD4L inTraj profile. Do not swap for the fast grid.
+# Fast variant: uavd4l_inTraj_fast.yaml
+
+name: uavd4l_inTraj
+profile: compact
+
+render:
+  h: 480
+  w: 640
+
+moge:
+  mode: sam3_moge2
+  enc_res: 640
+
+cv:
+  mask_size: [301, 224]
+  batch_size: 512
+
+cv_grid:
+  large:
+    range_xyz_deg: {x: 40.0, y: 40.0, z: 10.0, yaw_deg: 20.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 3, yaw_deg: 9}
+  small:
+    # 4D stage-2 (x,y,z,yaw) — 9×9×9×3 = 2187 hyps, same as the paper log.
+    range_xyz_deg: {x: 10.0, y: 10.0, z: 10.0, yaw_deg: 5.0, pitch_deg: 0.0, roll_deg: 0.0}
+    samples_xyz_deg: {x: 9, y: 9, z: 9, yaw_deg: 3, pitch_deg: 1, roll_deg: 1}
+
+pnp:
+  n_ab_iters: 5

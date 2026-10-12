@@ -1,0 +1,5 @@
+name: score_iou_edge
+cv:
+  depth_weight: 0.0
+particle_filter:
+  depth_weight: 0.0

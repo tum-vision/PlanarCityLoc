@@ -1,0 +1,12 @@
+# Snapshot before stage-2 pitch/roll CV fix (reproducibility).
+
+name: uavd4l_outTraj
+profile: wide
+
+cv_grid:
+  large:
+    range_xyz_deg: {x: 40.0, y: 40.0, z: 60.0, yaw_deg: 20.0}
+    samples_xyz_deg: {x: 5, y: 5, z: 5, yaw_deg: 5}
+  small:
+    range_xyz_deg: {x: 15.0, y: 15.0, z: 20.0, yaw_deg: 8.0, pitch_deg: 8.0, roll_deg: 8.0}
+    samples_xyz_deg: {x: 5, y: 5, z: 5, yaw_deg: 5, pitch_deg: 5, roll_deg: 5}

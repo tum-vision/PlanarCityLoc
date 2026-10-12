@@ -1,0 +1,5 @@
+name: moge2_vitb
+moge:
+  mode: sam3_moge2
+  moge_vits_model: Ruicheng/moge-2-vitb-normal
+  moge_vits_revision: 54ad3a693e61907ea4633d13dec6ee682fa09419
