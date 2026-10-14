@@ -23,12 +23,12 @@
   <a href="https://www.linkedin.com/in/nikolas-rieger/">Nikolas Rieger</a><sup>1,2,7</sup> &nbsp;
   <a href="https://www.linkedin.com/in/caroline-wendlandt/">Caroline Wendlandt</a><sup>1,2</sup><br>
   <a href="https://www.linkedin.com/in/christian-wender/">Christian Wender</a><sup>1,8</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/jingfeng-mao-125928260/">Jingfeng Mao</a><sup>2,4</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/guangming-wang/">Guangming Wang</a><sup>4</sup><br>
+  <a href="https://www.linkedin.com/in/jingfeng-mao-125928260/">Jingfeng Mao</a><sup>1,2,4</sup> &nbsp;
+  <a href="https://www.linkedin.com/in/guangming-wang/">Guangming Wang</a><sup>1,4</sup><br>
   <a href="https://zuriabauer.com/">Zuria Bauer</a><sup>5</sup> &nbsp;
   <a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup>5,9</sup> &nbsp;
   <a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup>2,6</sup> &nbsp;
-  <a href="https://olafwysocki.github.io/">Olaf Wysocki</a><sup>4</sup>
+  <a href="https://olafwysocki.github.io/">Olaf Wysocki</a><sup>1,4</sup>
 </p>
 
 <p>
