@@ -105,7 +105,8 @@
     "tum-ai-color-dark.svg": "Derived from tum-ai-color.svg: black fills and stroke changed to white for dark backgrounds; geometry and gradient unchanged.",
     "lmu.svg": "https://cms-cdn.lmu.de/assets/img/Logo_LMU.svg",
     "bmw-group.svg": "https://www.bmwgroup.com/etc.clientlibs/grpw-web/clientlibs/grpw-base/resources/images/logo/BMWGroup_dark.svg",
-    "relai.jpg": "https://zuseschoolrelai.de/wp-content/uploads/2022/09/TUM_RelAI-Logo_800px.jpg"
+    "relai.jpg": "https://zuseschoolrelai.de/wp-content/uploads/2022/09/TUM_RelAI-Logo_800px.jpg",
+    "relai-transparent.png": "https://zuseschoolrelai.de/wp-content/uploads/2022/06/TUM_RelAI-Logo-Text-weiss.png"
   },
   "colored_logo_references": {
     "tum-blue.svg": "https://commons.wikimedia.org/wiki/File:Logo_of_the_Technical_University_of_Munich.svg",

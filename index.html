@@ -9,11 +9,11 @@
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=red-plane-2">
   <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="research.css?v=camera-ready-1">
+  <link rel="stylesheet" href="research.css?v=paper-table-groups-1">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="teaser.css">
   <link rel="stylesheet" href="identity.css?v=hero-logo-4">
-  <link rel="stylesheet" href="institutions.css">
+  <link rel="stylesheet" href="institutions.css?v=transparent-logos-2">
 </head>
 <body>
   <header class="site-header">
@@ -61,7 +61,14 @@
           <li><a href="https://www.cam.ac.uk/" title="University of Cambridge" aria-label="4. University of Cambridge"><sup aria-hidden="true">4</sup><span class="institution-logo institution-cambridge"><img class="institution-light" src="assets/institutions/cambridge.svg" alt="University of Cambridge" width="128" height="27" decoding="async"><img class="institution-dark" src="assets/institutions/cambridge-dark.png" alt="University of Cambridge" width="128" height="27" decoding="async"></span></a></li>
           <li><a href="https://ethz.ch/" title="ETH Zürich" aria-label="5. ETH Zürich"><sup aria-hidden="true">5</sup><img class="institution-mono institution-eth" src="assets/institutions/eth-zurich.svg" alt="ETH Zürich" width="112" height="19" decoding="async"></a></li>
           <li><a href="https://mcml.ai/" title="Munich Center for Machine Learning" aria-label="6. Munich Center for Machine Learning"><sup aria-hidden="true">6</sup><img class="institution-mono institution-mcml" src="assets/institutions/mcml.png" alt="Munich Center for Machine Learning" width="99" height="15" decoding="async"></a></li>
-          <li><a href="https://zuseschoolrelai.de/" title="Konrad Zuse School of Excellence in Reliable AI (relAI)" aria-label="7. Konrad Zuse School of Excellence in Reliable AI (relAI)"><sup aria-hidden="true">7</sup><img src="assets/institutions/relai.jpg" alt="relAI" width="114" height="50" decoding="async"></a></li>
+          <li><a href="https://zuseschoolrelai.de/" title="Konrad Zuse School of Excellence in Reliable AI (relAI)" aria-label="7. Konrad Zuse School of Excellence in Reliable AI (relAI)"><sup aria-hidden="true">7</sup><svg class="institution-relai" viewBox="80 190 1900 860" width="114" height="52" role="img" aria-label="relAI">
+            <defs>
+              <clipPath id="relai-symbol"><path d="M0 0H1040V700H750V760H0Z"/></clipPath>
+              <clipPath id="relai-lettering"><path d="M1040 0H2481V1772H0V760H750V700H1040Z"/></clipPath>
+            </defs>
+            <image href="assets/institutions/relai-transparent.png" width="2481" height="1772" clip-path="url(#relai-symbol)"/>
+            <image class="relai-lettering" href="assets/institutions/relai-transparent.png" width="2481" height="1772" clip-path="url(#relai-lettering)"/>
+          </svg></a></li>
           <li><a href="https://www.bmwgroup.com/en.html" title="BMW Group" aria-label="8. BMW Group"><sup aria-hidden="true">8</sup><img class="institution-mono institution-bmw" src="assets/institutions/bmw-group.svg" alt="BMW Group" width="68" height="36" decoding="async"></a></li>
           <li><a href="https://www.microsoft.com/en-us/research/lab/spatial-ai-zurich/" title="Microsoft" aria-label="9. Microsoft"><sup aria-hidden="true">9</sup><span class="institution-logo institution-microsoft"><img class="institution-light" src="assets/institutions/microsoft.png" alt="Microsoft" width="102" height="22" decoding="async"><img class="institution-dark" src="assets/institutions/microsoft-dark.png" alt="Microsoft" width="102" height="22" decoding="async"></span></a></li>
         </ul>
@@ -73,7 +80,7 @@
           <a class="button primary" href="https://github.com/tum-vision/PlanarCityLoc" target="_blank" rel="noopener">
             <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.02 1.53 1.02.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.96c.85 0 1.7.11 2.5.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.41.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.33 4.68-4.56 4.93.36.31.68.92.68 1.85v2.61c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>Code
           </a>
-          <a class="button ghost" href="assets/PlanarCityLoc-WACV2027-poster.pdf" target="_blank" rel="noopener" type="application/pdf">
+          <a class="button ghost" href="assets/PlanarCityLoc-WACV2027-poster.pdf?v=logos-2" target="_blank" rel="noopener" type="application/pdf">
             <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Poster
           </a>
           <a class="button ghost" href="https://youtu.be/oDJtUY4ZRsE" target="_blank" rel="noopener">
@@ -219,7 +226,10 @@
       </div>
       <div class="table-toolbar">
         <label class="field" for="results-split">Evaluation split<select id="results-split"><option value="0">in-Traj</option><option value="1">out-of-Traj</option></select></label>
-        <p class="table-hint">Click a heading: best first, reverse, then reset.</p>
+        <div class="table-order-controls">
+          <p class="table-hint"><span id="results-order-label">Paper order</span> · Click a heading to sort within groups.</p>
+          <button id="results-paper-order" type="button" disabled>Reset to paper order</button>
+        </div>
       </div>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Sortable benchmark results">
         <table class="results-table">
@@ -267,7 +277,7 @@
   <script src="pipeline-diagram.js?v=camera-ready-1"></script>
   <script src="results-data.js?v=camera-ready-1"></script>
   <script src="qualitative-samples.js?v=camera-ready-1"></script>
-  <script src="results-explorer.js?v=camera-ready-1"></script>
+  <script src="results-explorer.js?v=paper-table-groups-1"></script>
   <script src="script.js"></script>
   <script src="identity.js?v=logo-stacked-1"></script>
 </body>

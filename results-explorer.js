@@ -11,7 +11,19 @@
   });
   const datasetButtons = [...document.querySelectorAll('#results [data-dataset]')];
   const sortButtons = [...document.querySelectorAll('[data-sort]')];
-  const splitSelect = $('#results-split'), body = $('#results-body');
+  const splitSelect = $('#results-split'), table = $('.results-table');
+  const paperOrderButton = $('#results-paper-order');
+  const paperSections = [
+    {id:'prior'},
+    {id:'textured', title:'Textured Mesh-based Models', level:'category'},
+    {id:'trained', parent:'LoD-based Models', title:'Requires Training', level:'setup'},
+    {id:'oracle', title:'Oracle (GT masks)', level:'setup'},
+    {id:'off-the-shelf', title:'Off-the-shelf', level:'setup'},
+    {id:'planarcityloc', title:'PlanarCityLoc (Ours)', level:'method'}
+  ];
+  const sectionFor = row => row.rankingGroup === 'off-the-shelf' && row.method.startsWith('PlanarCityLoc')
+    ? 'planarcityloc' : row.rankingGroup ?? 'prior';
+  const paperPosition = new Map(data.rows.map((row,index)=>[row.id,index]));
   const tips = {
     method: 'Methods use different map representations; see the map label below each method.',
     model: 'Vision model used by this configuration.',
@@ -83,7 +95,6 @@
   function tableValue(row,key) {return /^\d$/.test(key) ? row.metrics[dataset.splits[split].index][Number(key)] : row[key];}
   function renderTable() {
     hideTip();
-    const rows = [...data.rows];
     const ranksByGroup = new Map();
     for (const group of new Set(data.rows.map(row=>row.rankingGroup).filter(Boolean))) {
       ranksByGroup.set(group, Array.from({length:5},(_,metric) => [...new Set(data.rows
@@ -91,15 +102,17 @@
         .map(row=>row.metrics[dataset.splits[split].index][metric])
         .filter(Number.isFinite))].sort((a,b)=>metric<3?b-a:a-b).slice(0,2)));
     }
-    if(sortKey!==null) rows.sort((a,b)=>{
+    const compareRows = (a,b) => {
+      const paperOrder = paperPosition.get(a.id)-paperPosition.get(b.id);
+      if(sortKey===null)return paperOrder;
       const first=tableValue(a,sortKey), second=tableValue(b,sortKey);
       const firstMissing=first===null||first===undefined||(typeof first==='number'&&!Number.isFinite(first));
       const secondMissing=second===null||second===undefined||(typeof second==='number'&&!Number.isFinite(second));
       if(firstMissing!==secondMissing)return firstMissing?1:-1;
-      if(firstMissing)return a.id-b.id;
-      return (typeof first==='number'?first-second:first.localeCompare(second))*(ascending?1:-1)||a.id-b.id;
-    });
-    body.replaceChildren(...rows.map(row=>{
+      if(firstMissing)return paperOrder;
+      return (typeof first==='number'?first-second:first.localeCompare(second))*(ascending?1:-1)||paperOrder;
+    };
+    const makeRow = row => {
       const tr=document.createElement('tr');tr.dataset.rowId=row.id;if(row.ours)tr.className='ours';
       const name=document.createElement('th');name.scope='row';appendLabel(name,row.method);
       const map=document.createElement('span');map.className='method-note';map.textContent=row.map;addTip(map,`${row.map}. ${tips.method}`);name.append(map);tr.append(name);
@@ -121,7 +134,26 @@
         }else td.textContent=text;
         tr.append(td);
       });return tr;
-    }));
+    };
+    const makeHeading = (text,level,id) => {
+      const tr=document.createElement('tr');tr.className=`table-group table-group-${level}`;
+      const th=document.createElement('th');th.colSpan=8;th.textContent=text;
+      if(id){th.id=id;th.scope='rowgroup';}
+      tr.append(th);return tr;
+    };
+    const groups=paperSections.map(section=>{
+      const body=document.createElement('tbody');body.dataset.resultGroup=section.id;
+      if(section.parent)body.append(makeHeading(section.parent,'category'));
+      if(section.title){
+        const id=`results-group-${section.id}`;
+        body.append(makeHeading(section.title,section.level,id));body.setAttribute('aria-labelledby',id);
+      }
+      body.append(...data.rows.filter(row=>sectionFor(row)===section.id).sort(compareRows).map(makeRow));
+      return body;
+    });
+    [...table.tBodies].forEach(body=>body.remove());table.append(...groups);
+    paperOrderButton.disabled=sortKey===null;
+    $('#results-order-label').textContent=sortKey===null?'Paper order':'Custom order within groups';
     $('#results-caption').textContent=`${dataset.name} · ${dataset.splits[split].name} · ${dataset.lod}`;
     sortButtons.forEach(button=>{
       const selected=button.dataset.sort===sortKey;
@@ -139,8 +171,11 @@
   sortButtons.forEach(button=>button.addEventListener('click',()=>{
     const key=button.dataset.sort,bestFirst=!['0','1','2'].includes(key);
     if(key!==sortKey){sortKey=key;ascending=bestFirst;}else if(ascending===bestFirst)ascending=!bestFirst;else sortKey=null;
-    renderTable();$('#results-sort-status').textContent=sortKey===null?'Default order restored.':`Sorted by ${button.textContent.replace(/[↕↑↓]/g,'').trim()}, ${ascending?'ascending':'descending'}.`;
+    renderTable();$('#results-sort-status').textContent=sortKey===null?'Paper order restored.':`Sorted within each displayed group by ${button.textContent.replace(/[↕↑↓]/g,'').trim()}, ${ascending?'ascending':'descending'}.`;
   }));
+  paperOrderButton.addEventListener('click',()=>{
+    sortKey=null;renderTable();$('#results-sort-status').textContent='Paper order restored.';
+  });
 
   function createComparison(ds, group) {
     const samples=gallery.filter(item=>item.dataset===ds.id&&item.split===group.name).sort((a,b)=>Number(Boolean(b.origin))-Number(Boolean(a.origin)));
