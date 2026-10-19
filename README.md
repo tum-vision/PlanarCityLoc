@@ -2,8 +2,7 @@
 
 <img src="assets/planarcityloc-logo-readme.svg" alt="Animated drone matching building planes" width="240" />
 
-<h1>PlanarCityLoc</h1>
-<h3>Breaking Silhouette Ambiguity in LoD<br>Aerial Localization via 3D Planes</h3>
+<h3>PlanarCityLoc: Breaking Silhouette Ambiguity in LoD Aerial Localization via 3D Planes</h3>
 <p><strong>WACV 2027</strong></p>
 
 <p>
@@ -15,19 +14,19 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey" alt="License: CC BY-NC 4.0"></a>
 </p>
 
-<p>
-  <a href="https://ussaema.github.io">Oussema Dhaouadi</a><sup>1,2,4,5,6</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/shaojiehuchen/">Shao Jie Hu Chen</a><sup>1,2</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/jakob-gollreiter-939615194/">Jakob Gollreiter</a><sup>1,2</sup><br>
-  <a href="https://www.linkedin.com/in/samir-jusufi/">Samir Jusufi</a><sup>1,3</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/nikolas-rieger/">Nikolas Rieger</a><sup>1,2,7</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/caroline-wendlandt/">Caroline Wendlandt</a><sup>1,2</sup><br>
-  <a href="https://www.linkedin.com/in/christian-wender/">Christian Wender</a><sup>1,8</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/jingfeng-mao-125928260/">Jingfeng Mao</a><sup>1,2,4</sup> &nbsp;
-  <a href="https://www.linkedin.com/in/guangming-wang/">Guangming Wang</a><sup>1,4</sup><br>
-  <a href="https://zuriabauer.com/">Zuria Bauer</a><sup>5</sup> &nbsp;
-  <a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup>5,9</sup> &nbsp;
-  <a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup>2,6</sup> &nbsp;
+<p align="center">
+  <a href="https://ussaema.github.io">Oussema Dhaouadi</a><sup>1,2,4,5,6</sup>,
+  <a href="https://www.linkedin.com/in/shaojiehuchen/">Shao Jie Hu Chen</a><sup>1,2</sup>,
+  <a href="https://www.linkedin.com/in/jakob-gollreiter-939615194/">Jakob Gollreiter</a><sup>1,2</sup>,<br>
+  <a href="https://www.linkedin.com/in/samir-jusufi/">Samir Jusufi</a><sup>1,3</sup>,
+  <a href="https://www.linkedin.com/in/nikolas-rieger/">Nikolas Rieger</a><sup>1,2,7</sup>,
+  <a href="https://www.linkedin.com/in/caroline-wendlandt/">Caroline Wendlandt</a><sup>1,2</sup>,<br>
+  <a href="https://www.linkedin.com/in/christian-wender/">Christian Wender</a><sup>1,8</sup>,
+  <a href="https://www.linkedin.com/in/jingfeng-mao-125928260/">Jingfeng Mao</a><sup>1,2,4</sup>,
+  <a href="https://www.linkedin.com/in/guangming-wang/">Guangming Wang</a><sup>1,4</sup>,<br>
+  <a href="https://zuriabauer.com/">Zuria Bauer</a><sup>5</sup>,
+  <a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup>5,9</sup>,
+  <a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup>2,6</sup>,
   <a href="https://olafwysocki.github.io/">Olaf Wysocki</a><sup>1,4</sup>
 </p>
 
