@@ -42,7 +42,11 @@
 </div>
 
 <p align="center">
-  <img src="assets/teaser.png" width="92%" alt="PlanarCityLoc overview and localization examples" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/teaser-dark.png" />
+    <source media="(prefers-color-scheme: light)" srcset="assets/teaser-light.png" />
+    <img src="assets/teaser-light.png" width="92%" alt="PlanarCityLoc: silhouette alignment, 3D plane grounding, and conceptual pose-scoring curves" />
+  </picture>
 </p>
 
 PlanarCityLoc estimates the 6-DoF pose of an aerial image in a textureless
