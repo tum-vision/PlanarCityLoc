@@ -35,7 +35,7 @@
   <sup>1</sup> TUM.ai &nbsp; <sup>2</sup> Technical University of Munich &nbsp; <sup>3</sup> LMU Munich<br>
   <sup>4</sup> University of Cambridge &nbsp; <sup>5</sup> ETH Zürich<br>
   <sup>6</sup> Munich Center for Machine Learning<br>
-  <sup>7</sup> <a href="https://zuseschoolrelai.de/">Konrad Zuse School of Excellence in Reliable AI (relAI)</a><br>
+  <sup>7</sup> Konrad Zuse School of Excellence in Reliable AI (relAI)<br>
   <sup>8</sup> BMW Group &nbsp; <sup>9</sup> Microsoft
 </p>
 
