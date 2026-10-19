@@ -1,7 +1,7 @@
 {
   "protocol": "camera-ready-v2-equal-rank-estimated-plane-gate-no-cross-render-index-retention",
   "declared_on": "2026-10-08",
-  "status": "camera_ready_main_evaluation",
+  "status": "reported_main_evaluation",
   "cross_render_inlier_retention": false,
   "inlier_retention_reason": "Rendered plane IDs are sequential connected-component indices recomputed on every view; they are not stable physical-plane identities. RANSAC rejection and within-fit nonlinear refinement remain enabled.",
   "strict_gate": {

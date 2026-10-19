@@ -1,30 +1,29 @@
 # Reproducing the evaluation
 
-Use the versioned camera-ready launcher for the reported full-split results.
-It validates the bundled source and configuration, records the run settings,
-and retains the exact evaluation source alongside each output.
+Run the repository's `pipeline.py` for the reported full-split results.
+Both it and `pipeline_ablation.py` use the reported eight-feature rank selector
+in `pose_solver/selection.py`. Each run records its resolved configuration,
+source and input hashes, checkpoints, and environment in `run_manifest.json`.
 
-The reported results use the bundled eight-feature rank selector. Direct
-`pipeline.py` and `pipeline_ablation.py` runs use the six shared render features
-defined in `pose_solver/selection.py`. Use the camera-ready launcher for the
-reported results and keep these configurations distinct when comparing runs.
+The protocol is in [`configs/evaluation.json`](../configs/evaluation.json).
+Dataset profiles and component settings are under `configs/pipeline/`.
+Run the following commands from the repository root after completing the
+README setup and dataset preparation. Use a new output directory for each run.
 
 ```bash
-python scripts/run_camera_ready.py verify
-
-PYTHONPATH=. python scripts/run_camera_ready.py main -- \
+PYTHONPATH=. python pipeline.py \
   --dataset uavd4l --data_root data/UAVD4L-LoD/inTraj \
   --batchsize 512 --no-crop --out outputs/uavd4l_intraj
 
-PYTHONPATH=. python scripts/run_camera_ready.py main -- \
+PYTHONPATH=. python pipeline.py \
   --dataset uavd4l --data_root data/UAVD4L-LoD/outTraj \
   --batchsize 512 --no-crop --out outputs/uavd4l_outtraj
 
-PYTHONPATH=. python scripts/run_camera_ready.py main -- \
+PYTHONPATH=. python pipeline.py \
   --dataset swiss_epfl --data_root data/Swiss-EPFL/inPlace \
   --batchsize 512 --no-crop --out outputs/swiss_inplace
 
-PYTHONPATH=. python scripts/run_camera_ready.py main -- \
+PYTHONPATH=. python pipeline.py \
   --dataset swiss_epfl --data_root data/Swiss-EPFL/outPlace \
   --batchsize 512 --no-crop --out outputs/swiss_outplace
 ```
@@ -41,13 +40,17 @@ Swiss-EPFLv2.
 Summarize a completed run from its saved poses and verify query coverage:
 
 ```bash
-PYTHONPATH=. python scripts/summarize_camera_ready.py outputs/uavd4l_intraj
+PYTHONPATH=. python scripts/summarize_results.py outputs/uavd4l_intraj
 ```
 
 Recall is joint: both translation and rotation errors must be below the named
 threshold. Each run records the code, configuration, inputs, checkpoints,
 hardware, and package versions in its manifest. Keep output directories
 separate for each evaluation.
+
+Expected full-split metrics and query counts are recorded in
+[`benchmark_results.json`](benchmark_results.json). The protocol identifier
+in manifests remains stable so existing run records can still be verified.
 
 Batch size and GPU arithmetic can affect candidate selection. The recorded
 main evaluations use H100 NVL for both UAV splits and Swiss out-of-Place, and

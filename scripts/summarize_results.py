@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify saved poses against GT and report joint, not translation-only, recall."""
+"""Verify saved evaluation poses and report joint localization recall."""
 import argparse
 from collections import Counter
 import json

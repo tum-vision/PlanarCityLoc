@@ -1,7 +1,7 @@
 {
   "status": "independently_pose_audited_full_main_evaluations",
   "scope": "Full-split main evaluation metrics and stage evidence.",
-  "protocol_file": "configs/evaluation_camera_ready_v2.json",
+  "protocol_file": "configs/evaluation.json",
   "recall_definition": "translation_m < threshold AND rotation_deg < threshold; all queries in denominator",
   "stages": {
     "cv": "coarse search",

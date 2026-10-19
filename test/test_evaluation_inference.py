@@ -8,7 +8,7 @@ import unittest
 import numpy as np
 
 from pose_solver.selection import (
-    FEATURES, LEGACY_PROTOCOL, PROTOCOL, average_ranks,
+    FEATURES, SHARED_PROTOCOL, PROTOCOL, average_ranks,
     features_for_protocol, pick_rank_aggregation, rank_scores,
 )
 
@@ -44,23 +44,23 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(pick_rank_aggregation([
             {"lbl": "PF"}, {"lbl": "A1", "normal_err_deg": 0.0}]), "A1")
 
-    def test_pnp_only_features_cannot_break_a_shared_feature_tie(self):
+    def test_eight_feature_default_includes_pnp_fit_criteria(self):
         rows = [{"lbl": "PF", "iou": .8},
                 {"lbl": "A1", "iou": .8, "reproj": 0.0, "centroid_dist_px": 0.0}]
         before = rank_scores(rows)
-        np.testing.assert_array_equal(before, [.5, .5])
-        self.assertEqual(pick_rank_aggregation(rows), 'PF')
+        np.testing.assert_array_equal(before, [.375, .625])
+        self.assertEqual(pick_rank_aggregation(rows), 'A1')
+        np.testing.assert_array_equal(rank_scores(rows, protocol=SHARED_PROTOCOL), [.5, .5])
         rows[1].update(reproj=9999, centroid_dist_px=float('nan'))
-        np.testing.assert_array_equal(rank_scores(rows), before)
+        np.testing.assert_array_equal(rank_scores(rows, protocol=SHARED_PROTOCOL), [.5, .5])
 
-    def test_missing_pnp_residuals_do_not_overrule_a_better_pf_pose(self):
+    def test_default_matches_reported_eight_feature_selection(self):
         shared = dict(rec=.9, iou=.8, edge=.7, depth_ncc=.9, normal_err_deg=10.)
         rows = [dict(shared, lbl='PF', score=.9),
                 dict(shared, lbl='A1', score=.8, reproj=0., centroid_dist_px=0.)]
-        self.assertEqual(pick_rank_aggregation(rows), 'PF')
-        # Pin the exact behavior used by the versioned v2 protocol.
-        self.assertEqual(pick_rank_aggregation(rows, protocol=LEGACY_PROTOCOL), 'A1')
-        np.testing.assert_array_equal(rank_scores(rows, protocol=LEGACY_PROTOCOL), [.4375, .5625])
+        self.assertEqual(pick_rank_aggregation(rows), 'A1')
+        self.assertEqual(pick_rank_aggregation(rows, protocol=SHARED_PROTOCOL), 'PF')
+        np.testing.assert_array_equal(rank_scores(rows), [.4375, .5625])
 
     def test_pnp_with_better_shared_features_can_still_win(self):
         rows = [{'lbl': 'PF', 'score': .5, 'normal_err_deg': 20.},
@@ -71,15 +71,16 @@ class SelectionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             rank_scores([{'lbl': 'PF'}], protocol='unrecognized-protocol')
 
-    def test_manifest_records_six_feature_protocol(self):
+    def test_manifest_records_eight_feature_protocol(self):
         from utils.run_evidence import current_protocol
         spec = current_protocol()
         self.assertEqual(spec['protocol'], PROTOCOL)
-        self.assertEqual(len(FEATURES), 6)
-        self.assertEqual(len(features_for_protocol(LEGACY_PROTOCOL)), 8)
+        self.assertEqual(len(FEATURES), 8)
+        self.assertEqual(len(features_for_protocol(SHARED_PROTOCOL)), 6)
         self.assertEqual(spec['selection']['features'],
-                         ['score', 'rec', 'iou', 'edge', 'depth_ncc', 'negative_normal_error'])
-        np.testing.assert_allclose(spec['selection']['weights'], np.full(6, 1/6))
+                         ['score', 'rec', 'iou', 'edge', 'depth_ncc', 'negative_normal_error',
+                          'negative_reprojection_error', 'negative_centroid_distance'])
+        np.testing.assert_allclose(spec['selection']['weights'], np.full(8, 1/8))
 
     def test_evaluation_labels_are_ignored(self):
         rows = [{"lbl": "PF", "iou": .8}, {"lbl": "A1", "iou": .5}]
@@ -94,7 +95,7 @@ class SelectionTests(unittest.TestCase):
 
 
 class InferenceBoundaryTests(unittest.TestCase):
-    def test_both_entrypoints_use_fixed_shared_feature_selector(self):
+    def test_both_entrypoints_use_reported_eight_feature_selector(self):
         rows = [{'lbl': 'PF', 'iou': .8},
                 {'lbl': 'A1', 'iou': .8, 'reproj': 0., 'centroid_dist_px': 0.}]
         for filename in ('pipeline.py', 'pipeline_ablation.py'):
@@ -103,7 +104,7 @@ class InferenceBoundaryTests(unittest.TestCase):
                             and n.name == '_pick_rank_aggregation')
             namespace = {}
             exec(compile(ast.Module(body=[function], type_ignores=[]), filename, 'exec'), namespace)
-            self.assertEqual(namespace[function.name](rows), 'PF')
+            self.assertEqual(namespace[function.name](rows), 'A1')
 
     def test_ablation_runner_does_not_call_removed_renderer_api(self):
         tree = ast.parse((ROOT / 'pipeline_ablation.py').read_text())
@@ -175,19 +176,19 @@ class InferenceBoundaryTests(unittest.TestCase):
 
 class MetricTests(unittest.TestCase):
     def test_audit_uses_recorded_protocol_not_the_new_default(self):
-        from scripts.summarize_camera_ready import verify_candidate_selection
+        from scripts.summarize_results import verify_candidate_selection
         rows = [{'lbl': 'Particle Filter', 'iou': .9, 'w2c': np.eye(4)},
                 {'lbl': 'A-iter1', 'iou': .8, 'reproj': 0.,
                  'centroid_dist_px': 0., 'w2c': np.eye(4)}]
-        for row, rank in zip(rows, rank_scores(rows, protocol=LEGACY_PROTOCOL)):
+        for row, rank in zip(rows, rank_scores(rows, protocol=PROTOCOL)):
             row['aggregate_rank'] = float(rank)
         record = {'candidates': rows, 'selected': 'A-iter1', 'w2c_pf': np.eye(4)}
-        verify_candidate_selection(record, protocol=LEGACY_PROTOCOL)
+        verify_candidate_selection(record, protocol=PROTOCOL)
         with self.assertRaises(ValueError):
-            verify_candidate_selection(record, protocol=PROTOCOL)
+            verify_candidate_selection(record, protocol=SHARED_PROTOCOL)
 
     def test_repeat_summary_verification_preserves_original_bytes(self):
-        from scripts.summarize_camera_ready import save_or_verify_summary
+        from scripts.summarize_results import save_or_verify_summary
         result = {'n_queries': 379, 'sha256': 'abc', 'metric': .8965078149175553}
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder, 'verified_summary.json')
@@ -200,7 +201,7 @@ class MetricTests(unittest.TestCase):
             self.assertEqual(before, path.read_bytes())
 
     def test_repeat_summary_verification_rejects_changes_without_overwriting(self):
-        from scripts.summarize_camera_ready import save_or_verify_summary
+        from scripts.summarize_results import save_or_verify_summary
         result = {'n_queries': 379, 'sha256': 'abc', 'metric': 1.0}
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder, 'verified_summary.json')
@@ -213,7 +214,7 @@ class MetricTests(unittest.TestCase):
                 self.assertEqual(before, path.read_bytes())
 
     def test_saved_selector_audit_rejects_changed_selection_or_ranks(self):
-        from scripts.summarize_camera_ready import verify_candidate_selection
+        from scripts.summarize_results import verify_candidate_selection
         rows = [{'lbl': 'Particle Filter', 'iou': .1, 'w2c': np.eye(4)},
                 {'lbl': 'A-iter1', 'iou': .9, 'w2c': np.eye(4)}]
         for row, rank in zip(rows, rank_scores(rows)):
@@ -250,7 +251,7 @@ class MetricTests(unittest.TestCase):
         np.testing.assert_array_equal(tensor.numpy()[:, :, :, left+width:], 0)
 
     def test_joint_recall_requires_both_errors(self):
-        from scripts.summarize_camera_ready import statistics
+        from scripts.summarize_results import statistics
         result = statistics([(1, 3), (1, 1), (2, 0), (float('nan'), 0)])
         self.assertEqual(result['joint_recall_percent']['2'], 25.0)
         self.assertEqual(result['translation_only_recall_percent']['2'], 50.0)
@@ -285,7 +286,7 @@ class MetricTests(unittest.TestCase):
                 _metric3d_metric_depth(torch.ones(1), K, (3000, 4000), (480, 640))
 
     def test_camera_center_and_rotation(self):
-        from scripts.summarize_camera_ready import pose_errors
+        from scripts.summarize_results import pose_errors
         pose = np.eye(4)
         pose[:3, :3] = [[0, -1, 0], [1, 0, 0], [0, 0, 1]]
         pose[:3, 3] = [3, 4, 0]

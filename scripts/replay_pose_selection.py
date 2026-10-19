@@ -15,7 +15,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from pose_solver.selection import FEATURES, PROTOCOL, pick_rank_aggregation
-from scripts.summarize_camera_ready import (
+from scripts.summarize_results import (
     pose_errors, statistics, summarize, verify_summary_equal,
 )
 from utils.run_evidence import current_protocol, sha256
@@ -45,8 +45,8 @@ def replay(folder):
         record = json.loads(line)
         candidates = record['candidates']
         selected = pick_rank_aggregation(candidates)
-        # Selection must be identical when evaluation errors and PnP-only
-        # diagnostics are absent. Only declared render-based features remain.
+        # Selection must be identical when evaluation errors and undeclared
+        # diagnostics are absent. Only the declared selection features remain.
         stripped = [{k: c[k] for k in ('lbl', *(f[0] for f in FEATURES)) if k in c}
                     for c in candidates]
         if selected != pick_rank_aggregation(stripped):
@@ -95,7 +95,7 @@ def main():
         'selection_protocol': current_protocol(),
         'code_sha256': {p: sha256(ROOT / p) for p in (
             'pose_solver/selection.py', 'scripts/replay_pose_selection.py',
-            'scripts/summarize_camera_ready.py', 'utils/run_evidence.py')},
+            'scripts/summarize_results.py', 'utils/run_evidence.py')},
         'runs': results,
         'published_results_modified': False,
     }

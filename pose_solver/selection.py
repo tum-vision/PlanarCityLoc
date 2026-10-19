@@ -1,36 +1,34 @@
 """Untuned candidate selection, independent of evaluation labels.
 
-Only the six render-based features evaluated for every candidate contribute.
-PnP-fit residuals are diagnostics, not comparable scores for the unfitted PF
-candidate. Missing/nonfinite render-based features still receive the worst
-rank (e.g. insufficient visible overlap); exact ties receive average ranks.
-An aggregate tie keeps the earliest candidate (PF first, then A1, B1, ...).
-No ground-truth/error fields are read. Frozen v2 selection remains available
-only by explicit protocol for saved-candidate evaluation.
+Each of eight features contributes equally, as in the reported evaluations.
+Missing or nonfinite values receive the worst rank, and exact feature ties
+receive average ranks. An aggregate tie keeps the earliest candidate
+(PF first, then A1, B1, ...). No ground-truth/error fields are read.
 """
 
 import numpy as np
 
-FEATURES = (
+SHARED_FEATURES = (
     ("score", 1), ("rec", 1), ("iou", 1), ("edge", 1),
     ("depth_ncc", 1), ("normal_err_deg", -1),
 )
-LEGACY_FEATURES = FEATURES + (
+FEATURES = SHARED_FEATURES + (
     ("reproj", -1), ("centroid_dist_px", -1),
 )
-LEGACY_PROTOCOL = "camera-ready-v2-equal-rank-estimated-plane-gate-no-cross-render-index-retention"
-PROTOCOL = "camera-ready-v3-shared-six-rank-estimated-plane-gate-no-cross-render-index-retention"
+PROTOCOL = "camera-ready-v2-equal-rank-estimated-plane-gate-no-cross-render-index-retention"
+# Preserve identifiers when verifying existing run manifests. The shared-only
+# variant is supported for reading saved runs, not used by pipeline defaults.
+SHARED_PROTOCOL = "camera-ready-v3-shared-six-rank-estimated-plane-gate-no-cross-render-index-retention"
 PROTOCOL_FILES = {
-    LEGACY_PROTOCOL: "configs/evaluation_camera_ready_v2.json",
-    PROTOCOL: "configs/evaluation_camera_ready_v3.json",
+    PROTOCOL: "configs/evaluation.json",
 }
 
 
 def features_for_protocol(protocol):
     if protocol == PROTOCOL:
         return FEATURES
-    if protocol == LEGACY_PROTOCOL:
-        return LEGACY_FEATURES
+    if protocol == SHARED_PROTOCOL:
+        return SHARED_FEATURES
     raise ValueError(f"Unknown pose-selection protocol: {protocol!r}")
 
 

@@ -1063,7 +1063,7 @@ def _pnp_round(lbl: str) -> int:
 
 
 def _pick_rank_aggregation(table_rows: list[dict]) -> str:
-    """Fixed shared-feature rank aggregation; see pose_solver.selection."""
+    """Fixed eight-feature rank aggregation; see pose_solver.selection."""
     from pose_solver.selection import pick_rank_aggregation
     return pick_rank_aggregation(table_rows)
 

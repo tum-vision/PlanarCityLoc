@@ -124,35 +124,37 @@ See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for component licenses.
 A small smoke run on UAVD4L-LoDv2 in-Traj:
 
 ```bash
-PYTHONPATH=. python scripts/run_camera_ready.py main -- \
+PYTHONPATH=. python pipeline.py \
   --dataset uavd4l \
   --data_root data/UAVD4L-LoD/inTraj \
   --batchsize 8 --no-crop --n 3 \
   --out outputs/demo_intraj
 ```
 
-For the complete benchmark protocol, use the camera-ready launcher and a new
-output directory:
+For the reported full-split evaluation, use batch size 512 and a new output
+directory:
 
 ```bash
-PYTHONPATH=. python scripts/run_camera_ready.py main -- \
+PYTHONPATH=. python pipeline.py \
   --dataset uavd4l \
   --data_root data/UAVD4L-LoD/inTraj \
   --batchsize 512 --no-crop \
   --out outputs/eval_uavd4l_intraj
 ```
 
-The launcher retains the evaluation source and configuration with each run.
+Each run records its configuration, source hashes, inputs, and environment.
 To verify a run and recompute metrics from its saved poses:
 
 ```bash
-python scripts/run_camera_ready.py verify
-PYTHONPATH=. python scripts/summarize_camera_ready.py outputs/eval_uavd4l_intraj
+PYTHONPATH=. python scripts/summarize_results.py outputs/eval_uavd4l_intraj
 ```
 
 Full-split commands, dataset layout, and evaluation details are in
 [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md). Component studies are
 described in [`docs/ABLATIONS.md`](docs/ABLATIONS.md).
+
+The evaluation protocol is in [`configs/evaluation.json`](configs/evaluation.json),
+with expected full-split results in [`docs/benchmark_results.json`](docs/benchmark_results.json).
 
 ## 📝 Citation
 

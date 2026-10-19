@@ -1,7 +1,7 @@
 {
   "declared_on": "2026-10-08",
   "protocol": "camera-ready-v2",
-  "selection_rule": "Fixed equal-weight ranks; no selection or tuning based on these results",
+  "selection_rule": "Fixed equal-weight ranks over the eight evaluation features",
   "full_splits": ["UAVD4L inTraj LoD3", "UAVD4L outTraj LoD3", "Swiss inPlace LoD2", "Swiss outPlace LoD2", "UAVD4L inTraj LoD1", "UAVD4L outTraj LoD1"],
   "component_subset": {"frames_per_uav_split": 100, "random_seed": 42, "same_queries_for_every_variant": true},
   "component_execution_hardware": {"inTraj": "NVIDIA RTX A6000", "outTraj": "NVIDIA A40"},
