@@ -7,7 +7,7 @@
 
 <p>
   <a href="https://tum-vision.github.io/PlanarCityLoc/"><img src="https://img.shields.io/badge/🌐-Project%20Page-c93832" alt="Project page"></a>
-  <a href="https://youtu.be/oDJtUY4ZRsE"><img src="https://img.shields.io/badge/▶-Video-ff0000" alt="Video"></a>
+  <a href="https://youtu.be/goPJI491SRA"><img src="https://img.shields.io/badge/▶-Video-ff0000" alt="Video"></a>
   <img src="https://img.shields.io/badge/📄-Paper%20coming%20soon-grey" alt="Paper coming soon">
   <a href="https://tum-vision.github.io/PlanarCityLoc/assets/PlanarCityLoc-WACV2027-poster.pdf"><img src="https://img.shields.io/badge/📋-Poster-996633" alt="Poster"></a>
   <a href="data/README.md"><img src="https://img.shields.io/badge/📊-Datasets-326b69" alt="Datasets"></a>
