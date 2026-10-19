@@ -189,7 +189,7 @@
         <div class="dataset-tabs" role="group" aria-label="Qualitative dataset">
           <button type="button" data-gallery-dataset="all" aria-pressed="true">All datasets</button>
           <button type="button" data-gallery-dataset="uav" aria-pressed="false">UAVD4L-LoDv2</button>
-          <button type="button" data-gallery-dataset="swiss" aria-pressed="false">Swiss-EPFL-v2</button>
+          <button type="button" data-gallery-dataset="swiss" aria-pressed="false">Swiss-EPFLv2</button>
         </div>
         <div id="comparison-grid" class="comparison-grid"></div>
         <template id="comparison-card-template"><article class="comparison-card">
@@ -222,7 +222,7 @@
       <div class="section-heading"><span>03 / Quantitative evaluation</span><h2>Quantitative results</h2></div>
       <div class="dataset-tabs" role="group" aria-label="Evaluation dataset">
         <button type="button" data-dataset="uav" aria-pressed="true">UAVD4L-LoDv2</button>
-        <button type="button" data-dataset="swiss" aria-pressed="false">Swiss-EPFL-v2</button>
+        <button type="button" data-dataset="swiss" aria-pressed="false">Swiss-EPFLv2</button>
       </div>
       <div class="table-toolbar">
         <label class="field" for="results-split">Evaluation split<select id="results-split"><option value="0">in-Traj</option><option value="1">out-of-Traj</option></select></label>
@@ -248,7 +248,7 @@
         </table>
       </div>
       <p class="visually-hidden" id="results-sort-status" role="status"></p>
-      <p class="table-note">Joint-threshold recall (%) and median translation/rotation errors. Best and second-best distinct values are bold and underlined within each setup group, including ties. † Adapted re-runs with different map and evaluation assumptions. * Uses the non-public InsLoD-Loc training set.</p>
+      <p class="table-note">Joint-threshold recall (%) and median translation/rotation errors. Best and second-best distinct values are bold and underlined within each setup group. † Adapted LoD-Loc evaluations with nvdiffrast rendering and either ground-truth-rendered masks or off-the-shelf SAM 3 predictions. * Uses the InsLoD-Loc training set.</p>
       <noscript><p>Enable JavaScript to switch datasets, sort the table, and compare predictions.</p></noscript>
 
 

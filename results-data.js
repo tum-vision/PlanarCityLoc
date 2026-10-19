@@ -31,7 +31,7 @@ window.PLANARCITYLOC_RESULTS = {
     },
     {
       "id": "swiss",
-      "name": "Swiss-EPFL-v2",
+      "name": "Swiss-EPFLv2",
       "lod": "LoD2",
       "splits": [
         {
@@ -481,7 +481,7 @@ window.PLANARCITYLOC_RESULTS = {
       "id": 11,
       "method": "PlanarCityLoc · cost volume",
       "map": "LoD model · initialization",
-      "model": "SAM3",
+      "model": "MoGe-2 + SAM3",
       "setup": "Off-the-shelf",
       "ours": false,
       "rankingGroup": "off-the-shelf",
@@ -520,7 +520,7 @@ window.PLANARCITYLOC_RESULTS = {
       "id": 12,
       "method": "PlanarCityLoc · + particle filter",
       "map": "LoD model · coarse pose",
-      "model": "SAM3",
+      "model": "MoGe-2 + SAM3",
       "setup": "Off-the-shelf",
       "ours": false,
       "rankingGroup": "off-the-shelf",
