@@ -64,10 +64,10 @@ listed threshold.
 
 | Evaluation split | Queries | Recall @ 2 m / 2° | Median translation | Median rotation |
 |---|---:|---:|---:|---:|
-| UAVD4L in-Traj | 1,604 | 75.4% | 1.28 m | 0.68° |
-| UAVD4L out-of-Traj | 2,192 | 80.6% | 1.26 m | 0.69° |
-| Swiss-EPFL in-Place | 712 | 20.6% | 3.70 m | 1.90° |
-| Swiss-EPFL out-of-Place | 379 | 48.5% | 1.98 m | 1.21° |
+| UAVD4L-LoDv2 in-Traj | 1,604 | 75.4% | 1.28 m | 0.68° |
+| UAVD4L-LoDv2 out-of-Traj | 2,192 | 80.6% | 1.26 m | 0.69° |
+| Swiss-EPFLv2 in-Place | 712 | 20.6% | 3.70 m | 1.90° |
+| Swiss-EPFLv2 out-of-Place | 379 | 48.5% | 1.98 m | 1.21° |
 
 ## 🛠️ Setup
 
@@ -121,7 +121,7 @@ See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for component licenses.
 
 ## 🚀 Run
 
-A small smoke run on UAVD4L in-Traj:
+A small smoke run on UAVD4L-LoDv2 in-Traj:
 
 ```bash
 PYTHONPATH=. python scripts/run_camera_ready.py main -- \

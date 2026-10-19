@@ -29,10 +29,14 @@ PYTHONPATH=. python scripts/run_camera_ready.py main -- \
   --batchsize 512 --no-crop --out outputs/swiss_outplace
 ```
 
-The expected split sizes are 1,604 and 2,192 queries for UAVD4L, and 712 and
-379 queries for Swiss-EPFL. Use the full split, the matching LoD mesh, the
+The expected split sizes are 1,604 and 2,192 queries for UAVD4L-LoDv2, and 712 and
+379 queries for Swiss-EPFLv2. Use the full split, the matching LoD mesh, the
 aggregate pose files, and the split-specific configuration. Dataset files are
 provided by their original sources; see [`data/README.md`](../data/README.md).
+
+These query splits retain the original benchmark directory names shown in the
+commands above. The main evaluations use LoD3 for UAVD4L-LoDv2 and LoD2 for
+Swiss-EPFLv2.
 
 Summarize a completed run from its saved poses and verify query coverage:
 
