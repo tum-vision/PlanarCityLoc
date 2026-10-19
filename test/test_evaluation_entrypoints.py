@@ -2,6 +2,7 @@
 import ast
 from dataclasses import make_dataclass
 import json
+import re
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -69,6 +70,21 @@ class EvaluationEntrypointTests(unittest.TestCase):
             self.assertNotIn('summarize_camera_ready', text)
             self.assertIn('python pipeline', text)
         self.assertFalse((ROOT / 'reproducibility').exists())
+
+    def test_release_workflow_references_existing_evaluation_files(self):
+        workflow = (ROOT / '.github/workflows/validate.yml').read_text()
+        self.assertNotIn('run_camera_ready.py', workflow)
+        self.assertNotIn('reproducibility/', workflow)
+        scripts = re.findall(r'\bpython\s+([\w./-]+\.py)\b', workflow)
+        self.assertIn('scripts/summarize_results.py', scripts)
+        for name in scripts:
+            with self.subTest(script=name):
+                self.assertTrue((ROOT / name).is_file())
+        for name in ('configs/evaluation.json', 'configs/ablations.json',
+                     'docs/benchmark_results.json'):
+            with self.subTest(configuration=name):
+                self.assertIn(name, workflow)
+                self.assertIsInstance(json.loads((ROOT / name).read_text()), dict)
 
 
 if __name__ == '__main__':

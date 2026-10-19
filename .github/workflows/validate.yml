@@ -35,5 +35,9 @@ jobs:
         run: |
           find scripts -type f -name '*.sh' -print0 |
             xargs -0 -n1 bash -n
-      - name: Verify evaluation source bundles
-        run: python scripts/run_camera_ready.py verify
+      - name: Validate evaluation configuration and reporting CLI
+        run: |
+          python -m json.tool configs/evaluation.json > /dev/null
+          python -m json.tool configs/ablations.json > /dev/null
+          python -m json.tool docs/benchmark_results.json > /dev/null
+          python scripts/summarize_results.py --help
