@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="teaser.css">
   <link rel="stylesheet" href="identity.css?v=hero-logo-4">
-  <link rel="stylesheet" href="institutions.css?v=transparent-logos-2">
+  <link rel="stylesheet" href="institutions.css?v=relai-theme-mask-3">
 </head>
 <body>
   <header class="site-header">
@@ -65,9 +65,12 @@
             <defs>
               <clipPath id="relai-symbol"><path d="M0 0H1040V700H750V760H0Z"/></clipPath>
               <clipPath id="relai-lettering"><path d="M1040 0H2481V1772H0V760H750V700H1040Z"/></clipPath>
+              <mask id="relai-lettering-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2481" height="1772" style="mask-type:alpha">
+                <image href="assets/institutions/relai-transparent.png" width="2481" height="1772" clip-path="url(#relai-lettering)"/>
+              </mask>
             </defs>
             <image href="assets/institutions/relai-transparent.png" width="2481" height="1772" clip-path="url(#relai-symbol)"/>
-            <image class="relai-lettering" href="assets/institutions/relai-transparent.png" width="2481" height="1772" clip-path="url(#relai-lettering)"/>
+            <rect class="relai-lettering" width="2481" height="1772" fill="currentColor" mask="url(#relai-lettering-mask)"/>
           </svg></a></li>
           <li><a href="https://www.bmwgroup.com/en.html" title="BMW Group" aria-label="8. BMW Group"><sup aria-hidden="true">8</sup><img class="institution-mono institution-bmw" src="assets/institutions/bmw-group.svg" alt="BMW Group" width="68" height="36" decoding="async"></a></li>
           <li><a href="https://www.microsoft.com/en-us/research/lab/spatial-ai-zurich/" title="Microsoft" aria-label="9. Microsoft"><sup aria-hidden="true">9</sup><span class="institution-logo institution-microsoft"><img class="institution-light" src="assets/institutions/microsoft.png" alt="Microsoft" width="102" height="22" decoding="async"><img class="institution-dark" src="assets/institutions/microsoft-dark.png" alt="Microsoft" width="102" height="22" decoding="async"></span></a></li>
