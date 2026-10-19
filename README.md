@@ -102,8 +102,8 @@ Run commands from the repository root with `PYTHONPATH=.`.
 
 Benchmark assets and model weights are not hosted in this repository. Obtain
 them from their original providers, follow the providers' terms, and arrange
-the files as described in [`data/README.md`](data/README.md) and
-[`DATA_PROVENANCE.md`](DATA_PROVENANCE.md). The setup helper links locally
+the files as described in the [dataset guide](data/README.md), which includes
+source links and attribution. The setup helper links locally
 available benchmark files, query images, and checkpoints:
 
 ```bash
@@ -120,7 +120,7 @@ PYTHONPATH=. python scripts/prepare_sam3_fast.py
 The script downloads the full checkpoint through your authorized Hugging Face
 account, or accepts a local checkpoint with `--full-checkpoint /path/to/sam3.pt`.
 MoGe-2 downloads automatically at the revision pinned in the configuration.
-See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for component licenses.
+See [License and acknowledgements](#license-and-acknowledgements) for component licenses.
 
 ## 🚀 Run
 
@@ -170,7 +170,26 @@ with expected full-split results in [`docs/benchmark_results.json`](docs/benchma
 }
 ```
 
-## ⚖️ License
+<a id="license-and-acknowledgements"></a>
+
+## ⚖️ License and acknowledgements
 
 PlanarCityLoc code is released under [CC BY-NC 4.0](LICENSE). Third-party
 software, models, and benchmark data retain their respective terms.
+
+- **SAM 3**: Copyright Meta Platforms, Inc. and affiliates. The bundled
+  [source](thirdparty/sam3/) and cached `building` prompt feature in
+  `assets/sam3_building_language_features.b85` are subject to the
+  [SAM License](thirdparty/sam3/LICENSE). Full checkpoints are obtained separately.
+- **EoMT**: Copyright Mobile Perception Systems Lab at TU/e. The bundled
+  [source](thirdparty/eomt_repo/) retains its [MIT License](thirdparty/eomt_repo/LICENSE).
+- **MoGe / MoGe-2**: Installed from Microsoft's repository at the revision
+  pinned above. MoGe is MIT-licensed, and its bundled DINOv2 component is
+  Apache-2.0-licensed. See the upstream repository for complete notices.
+- **nvdiffrast** and packages in `requirements.txt` retain their upstream
+  licenses and notices.
+
+Model checkpoints and query images are not included and remain subject to
+their providers' terms. Dataset sources and attribution, including
+**©swisstopo** for the Swiss geodata, are listed in the
+[dataset guide](data/README.md#sources-and-attribution).

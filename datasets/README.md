@@ -47,5 +47,5 @@ data/
   benchmark authors, not recorded as raw GPS. We use the released files unchanged.
 
 See [`docs/REPRODUCIBILITY.md`](../docs/REPRODUCIBILITY.md) for the exact paper
-protocol and [`DATA_PROVENANCE.md`](../DATA_PROVENANCE.md) for original sources,
+protocol and [data sources and attribution](../data/README.md#sources-and-attribution) for original sources,
 processing, checksums, and redistribution terms.
