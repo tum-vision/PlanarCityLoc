@@ -8,7 +8,7 @@
 <p>
   <a href="https://tum-vision.github.io/PlanarCityLoc/"><img src="https://img.shields.io/badge/🌐-Project%20Page-c93832" alt="Project page"></a>
   <a href="https://youtu.be/goPJI491SRA"><img src="https://img.shields.io/badge/▶-Video-ff0000" alt="Video"></a>
-  <img src="https://img.shields.io/badge/📄-Paper%20coming%20soon-grey" alt="Paper coming soon">
+  <a href="https://arxiv.org/abs/2610.26729"><img src="https://img.shields.io/badge/📄-Paper-arXiv-b31b1b" alt="Paper on arXiv"></a>
   <a href="https://tum-vision.github.io/PlanarCityLoc/assets/PlanarCityLoc-WACV2027-poster.pdf"><img src="https://img.shields.io/badge/📋-Poster-996633" alt="Poster"></a>
   <a href="data/README.md"><img src="https://img.shields.io/badge/📊-Datasets-326b69" alt="Datasets"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey" alt="License: CC BY-NC 4.0"></a>
@@ -166,7 +166,8 @@ with expected full-split results in [`docs/benchmark_results.json`](docs/benchma
   title     = {{PlanarCityLoc}: Breaking Silhouette Ambiguity in {LoD} Aerial Localization via 3{D} Planes},
   author    = {Dhaouadi, Oussema and Hu Chen, Shao Jie and Gollreiter, Jakob and Jusufi, Samir and Rieger, Nikolas and Wendlandt, Caroline and Wender, Christian and Mao, Jingfeng and Wang, Guangming and Bauer, Zuria and Pollefeys, Marc and Cremers, Daniel and Wysocki, Olaf},
   booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-  year      = {2027}
+  year      = {2027},
+  url       = {https://arxiv.org/abs/2610.26729}
 }
 ```
 
